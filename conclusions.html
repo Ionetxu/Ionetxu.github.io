@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 5 Conclusions | Air pollution in Barcelona</title>
+  <meta name="description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 5 Conclusions | Air pollution in Barcelona" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Conclusions | Air pollution in Barcelona" />
+  
+  <meta name="twitter:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+<meta name="author" content="Jone Lerchundi">
+
+
+<meta name="date" content="2019-06-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="forecasting.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Air pollution in Barcelona</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#scope"><i class="fa fa-check"></i><b>1.2</b> Scope</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#approach"><i class="fa fa-check"></i><b>1.3</b> Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html"><i class="fa fa-check"></i><b>2</b> Data cleaning and gathering</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#pollution"><i class="fa fa-check"></i><b>2.1.1</b> Pollution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#weather-data"><i class="fa fa-check"></i><b>2.1.2</b> Weather data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#hospitalizations-in-barcelona"><i class="fa fa-check"></i><b>2.1.3</b> Hospitalizations in Barcelona</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#initial-data-cleansing-and-analysis"><i class="fa fa-check"></i><b>2.2</b> Initial data cleansing and analysis</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#missing-values-management---package-imputets"><i class="fa fa-check"></i><b>2.2.1</b> Missing values management - package imputeTS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>3</b> Data exploration</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-exploration.html"><a href="data-exploration.html#general-exploration"><i class="fa fa-check"></i><b>3.1</b> General exploration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-exploration.html"><a href="data-exploration.html#weather-and-pollution"><i class="fa fa-check"></i><b>3.2</b> Weather and pollution</a></li>
+<li class="chapter" data-level="3.3" data-path="data-exploration.html"><a href="data-exploration.html#health-and-pollution"><i class="fa fa-check"></i><b>3.3</b> Health and pollution</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>4</b> Forecasting</a></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a><ul>
+<li class="chapter" data-level="5.1" data-path="conclusions.html"><a href="conclusions.html#data-quality"><i class="fa fa-check"></i><b>5.1</b> Data Quality</a></li>
+<li class="chapter" data-level="5.2" data-path="conclusions.html"><a href="conclusions.html#which-days-of-the-week-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.2</b> Which days of the week have the cleanest air?</a></li>
+<li class="chapter" data-level="5.3" data-path="conclusions.html"><a href="conclusions.html#which-months-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.3</b> Which months have the cleanest air?</a></li>
+<li class="chapter" data-level="5.4" data-path="conclusions.html"><a href="conclusions.html#what-time-of-the-day-is-the-most-polluted-and-the-cleanest"><i class="fa fa-check"></i><b>5.4</b> What time of the day is the most polluted? And the cleanest?</a></li>
+<li class="chapter" data-level="5.5" data-path="conclusions.html"><a href="conclusions.html#compliance-with-eu-air-quality-legislation"><i class="fa fa-check"></i><b>5.5</b> Compliance with EU Air Quality Legislation?</a></li>
+<li class="chapter" data-level="5.6" data-path="conclusions.html"><a href="conclusions.html#weather-impacts-to-pollution"><i class="fa fa-check"></i><b>5.6</b> Weather impacts to pollution</a></li>
+<li class="chapter" data-level="5.7" data-path="conclusions.html"><a href="conclusions.html#pollutions-relationship-with-medical-issues"><i class="fa fa-check"></i><b>5.7</b> Pollution’s relationship with medical issues</a></li>
+<li class="chapter" data-level="5.8" data-path="conclusions.html"><a href="conclusions.html#forecasting-pollution"><i class="fa fa-check"></i><b>5.8</b> Forecasting pollution</a></li>
+<li class="chapter" data-level="5.9" data-path="conclusions.html"><a href="conclusions.html#next-steps"><i class="fa fa-check"></i><b>5.9</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>6</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Air pollution in Barcelona</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conclusions" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Conclusions</h1>
+<p>I will use this last section to wrap up all the insights learned from this project.</p>
+<div id="data-quality" class="section level2">
+<h2><span class="header-section-number">5.1</span> Data Quality</h2>
+<ul>
+<li>PM 2.5 not automatically measured hourly</li>
+</ul>
+<p>The first finding I encountered was that PM2.5 is not measured automatically in an hourly manner. PM2.5 is probably the most dangerous air pollutant due to its small size that they can penetrate deep in the lungs and even in the blood stream, causing not only respiratory issues but also heart related problems.</p>
+<p>For this reason, I strongly encourage the local administration to start measuring PM2.5 in order to keep it under control and be able to act with information.</p>
+<ul>
+<li>Completeness of pollution measurement</li>
+</ul>
+<p>Another important finding was that the pollution is automatically measured only between 10am and midnight 12am. This means morning rush hour pollution is not being measured, hence we don’t have completeness of data. Having complete information would help not only to understand data patterns better, but also to be able to build better prediction models and be able to anticipate pollution episodes more accurately.</p>
+</div>
+<div id="which-days-of-the-week-have-the-cleanest-air" class="section level2">
+<h2><span class="header-section-number">5.2</span> Which days of the week have the cleanest air?</h2>
+<p>In terms of understanding pollution patterns, weekends have better PM10 and NO2 average concentrations than weekdays, being Fridays the day with the highest pollution for both NO2 and PM10, and Sunday the day with the cleanest air.</p>
+</div>
+<div id="which-months-have-the-cleanest-air" class="section level2">
+<h2><span class="header-section-number">5.3</span> Which months have the cleanest air?</h2>
+<p>Regarding the months, <strong>August</strong> is the cleanest month for NO2 as an average of the last five years, while <strong>December</strong> is the worst. It’s interesting to see this as it seems like the higher temperatures in the summer doesn’t seem to affect NO2 concentrations. Also, the big amount of tourists don’t seem to be the cause of NO2, but probably it’s locals using cars to get into the city.</p>
+<p>For PM10 the best month with lowest average concentration and the cleanest in the last five years is <strong>January</strong>, and the most polluted month is <strong>June</strong>. This is so different from NO2 patterns that I suspect different sources are affecting each pollutant.</p>
+</div>
+<div id="what-time-of-the-day-is-the-most-polluted-and-the-cleanest" class="section level2">
+<h2><span class="header-section-number">5.4</span> What time of the day is the most polluted? And the cleanest?</h2>
+<p>4pm is the time of the day where both PM10 and NO2 are the lowest concentration. For NO2, 10am and 9pm are the most polluted times, while for PM10 10am is the most polluted time of the day. This is according to the data we have, as there might be another pollution peak before 10am that is not being measured currently.</p>
+</div>
+<div id="compliance-with-eu-air-quality-legislation" class="section level2">
+<h2><span class="header-section-number">5.5</span> Compliance with EU Air Quality Legislation?</h2>
+<p>NO2 yearly average levels have breach the limits set by EU air quality legislation in the last years. Barcelona, among other cities, has been warned to implement air quality plans and set out appropriate measures to bring this situation to an end as soon as possible. See some news about this <a href="http://europa.eu/rapid/press-release_IP-17-238_en.htm">here</a>.</p>
+<p>In contrast, yearly average levels of PM10 are complient with the EU legislation. But the hourly limit has been breach with extremely high concentrations of PM10, specially in June. The highest concentrations (with max value of 1409 µg/m3 in 2017, with daily average limit being 50 µg/m3) happen to be around 23rd and 24th June, on <strong>Sant Joan</strong>, where the city celebrates summer solstice with bonfires, fireworks and firecrackers. Firecrackers are extremely pollutant, and they should be regulated like in China or India, where fireworks have been banned for Lunar New Year or Diwali festivities.</p>
+</div>
+<div id="weather-impacts-to-pollution" class="section level2">
+<h2><span class="header-section-number">5.6</span> Weather impacts to pollution</h2>
+<p>Weather is one of the components that has more effect on air pollution. In Barcelona, <strong>NO2</strong> pollutant is most affected by <strong>wind speed</strong> and <strong>wind direction</strong>. The optimal wind direction for lower NO2 concentration would be <strong>North West</strong>, while when the wind is South East the NO2 pollution is higher.</p>
+<p>Regarding <strong>PM10</strong>, it’s most affected by temperature and wind direction, being <strong>North West</strong> winds best to clean the air in the city.</p>
+</div>
+<div id="pollutions-relationship-with-medical-issues" class="section level2">
+<h2><span class="header-section-number">5.7</span> Pollution’s relationship with medical issues</h2>
+<p>Hospitalizations for respiratory and heart issues are moderately correlated to NO2 pollution levels, while PM10 is somewhat correlated but I was not able to find strong relations neither with respiratory or heart related hospitalizations.</p>
+</div>
+<div id="forecasting-pollution" class="section level2">
+<h2><span class="header-section-number">5.8</span> Forecasting pollution</h2>
+<p>Forecasting pollution is extremely complex due to the high variability of the process, but it’s important to be able to anticipate high pollution episodes in order to take actions and protect the citizens.</p>
+</div>
+<div id="next-steps" class="section level2">
+<h2><span class="header-section-number">5.9</span> Next steps</h2>
+<p>This is an ongoing project, and I plan to continue working on this analysis as a personal project. I want to work on the following topics:</p>
+<ul>
+<li><p>Improving the forecasting model by creating a multivariate time series, with multiple variables that can affect pollution.</p></li>
+<li>Including ground level Ozone O3 into the analysis.</li>
+<li>Analyzing how strikes affect to pollution.</li>
+<li>How does the traffic of port of Barcelona affect to pollution?</li>
+<li>How does air traffic affect to pollution?</li>
+<li><p>Implement a dashboard for citizens of Barcelona with real-time data.</p></li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="forecasting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

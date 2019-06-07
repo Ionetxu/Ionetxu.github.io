@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Forecasting | Air pollution in Barcelona</title>
+  <meta name="description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Forecasting | Air pollution in Barcelona" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Forecasting | Air pollution in Barcelona" />
+  
+  <meta name="twitter:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+<meta name="author" content="Jone Lerchundi">
+
+
+<meta name="date" content="2019-06-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-exploration.html">
+<link rel="next" href="conclusions.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Air pollution in Barcelona</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#scope"><i class="fa fa-check"></i><b>1.2</b> Scope</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#approach"><i class="fa fa-check"></i><b>1.3</b> Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html"><i class="fa fa-check"></i><b>2</b> Data cleaning and gathering</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#pollution"><i class="fa fa-check"></i><b>2.1.1</b> Pollution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#weather-data"><i class="fa fa-check"></i><b>2.1.2</b> Weather data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#hospitalizations-in-barcelona"><i class="fa fa-check"></i><b>2.1.3</b> Hospitalizations in Barcelona</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#initial-data-cleansing-and-analysis"><i class="fa fa-check"></i><b>2.2</b> Initial data cleansing and analysis</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#missing-values-management---package-imputets"><i class="fa fa-check"></i><b>2.2.1</b> Missing values management - package imputeTS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>3</b> Data exploration</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-exploration.html"><a href="data-exploration.html#general-exploration"><i class="fa fa-check"></i><b>3.1</b> General exploration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-exploration.html"><a href="data-exploration.html#weather-and-pollution"><i class="fa fa-check"></i><b>3.2</b> Weather and pollution</a></li>
+<li class="chapter" data-level="3.3" data-path="data-exploration.html"><a href="data-exploration.html#health-and-pollution"><i class="fa fa-check"></i><b>3.3</b> Health and pollution</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>4</b> Forecasting</a></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a><ul>
+<li class="chapter" data-level="5.1" data-path="conclusions.html"><a href="conclusions.html#data-quality"><i class="fa fa-check"></i><b>5.1</b> Data Quality</a></li>
+<li class="chapter" data-level="5.2" data-path="conclusions.html"><a href="conclusions.html#which-days-of-the-week-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.2</b> Which days of the week have the cleanest air?</a></li>
+<li class="chapter" data-level="5.3" data-path="conclusions.html"><a href="conclusions.html#which-months-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.3</b> Which months have the cleanest air?</a></li>
+<li class="chapter" data-level="5.4" data-path="conclusions.html"><a href="conclusions.html#what-time-of-the-day-is-the-most-polluted-and-the-cleanest"><i class="fa fa-check"></i><b>5.4</b> What time of the day is the most polluted? And the cleanest?</a></li>
+<li class="chapter" data-level="5.5" data-path="conclusions.html"><a href="conclusions.html#compliance-with-eu-air-quality-legislation"><i class="fa fa-check"></i><b>5.5</b> Compliance with EU Air Quality Legislation?</a></li>
+<li class="chapter" data-level="5.6" data-path="conclusions.html"><a href="conclusions.html#weather-impacts-to-pollution"><i class="fa fa-check"></i><b>5.6</b> Weather impacts to pollution</a></li>
+<li class="chapter" data-level="5.7" data-path="conclusions.html"><a href="conclusions.html#pollutions-relationship-with-medical-issues"><i class="fa fa-check"></i><b>5.7</b> Pollution’s relationship with medical issues</a></li>
+<li class="chapter" data-level="5.8" data-path="conclusions.html"><a href="conclusions.html#forecasting-pollution"><i class="fa fa-check"></i><b>5.8</b> Forecasting pollution</a></li>
+<li class="chapter" data-level="5.9" data-path="conclusions.html"><a href="conclusions.html#next-steps"><i class="fa fa-check"></i><b>5.9</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>6</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Air pollution in Barcelona</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="forecasting" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Forecasting</h1>
+<p>To predict pollution values is essential for local government, environmental or health agencies, to be able to anticipate and establish procedures to reduce the severity of local pollution levels.</p>
+<p>But it’s also helpful for citizens because forecasting helps people plan ahead, and be able to decrease the effects on health and the costs associated.</p>
+<p>As we have seen, air pollution levels are strongly correlated with local weather conditions and nearby pollution emissions.However, long-range transport of pollution - through strong winds - is also a significant influencing factor and must be taken into consideration when forecasting local readings.</p>
+<p>Predicting air quality, therefore, not only involves the difficulties of weather forecasting, it also requires data on and knowledge of:</p>
+<ul>
+<li>Local pollutant concentrations and emissions</li>
+<li>Pollutant concentrations and emissions from distant locations</li>
+<li>Movements and possible transformations of pollutants</li>
+<li>Prevailing winds</li>
+</ul>
+<p>So forecasting pollution is much more complex than predicting the weather, but it’s vital and I will try to analyze and implement.</p>
+<p>For forecasting I am going to focus in Eixample, and pollutant NO2 only. I will generate 3 different training sets: - Data for 4 years from 2014 to 2018. - Data for 1 year from 2018. - Data for 1 month of 2018, September.</p>
+<p>Please load files “Eixample_NO2_2014_2018.csv”, “Eixample_NO2_2018.csv”, and “Eixample_NO2_2018_09.csv”. You can find the R script <a href="https://github.com/Ionetxu/Project_AIR/blob/master/Forecasting_models.R">here</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(purrr)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(knitr)
+<span class="kw">library</span>(xts)
+<span class="kw">library</span>(zoo)
+<span class="kw">library</span>(gridExtra)
+<span class="kw">library</span>(fpp2)
+<span class="kw">library</span>(RcppRoll)
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(imputeTS)
+<span class="kw">library</span>(ggfortify)
+<span class="kw">library</span>(urca)
+<span class="kw">library</span>(forecast)
+
+Eixample_NO2_2014_<span class="dv">2018</span> &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Eixample_NO2_2014_2018.csv&#39;</span>)
+Eixample_NO2_<span class="dv">2018</span> &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Eixample_NO2_2018.csv&#39;</span>)
+Eixample_NO2_2018_<span class="dv">09</span> &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Eixample_NO2_2018_09.csv&#39;</span>)</code></pre></div>
+<p>I am going to transform the dataframes into ts time series objects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_ts &lt;-<span class="st"> </span><span class="kw">ts</span>(Eixample_NO2_2014_<span class="dv">2018</span>[,<span class="dv">10</span>], <span class="dt">frequency =</span> <span class="dv">24</span>)
+Eixample_NO2_2018_ts &lt;-<span class="st"> </span><span class="kw">ts</span>(Eixample_NO2_<span class="dv">2018</span>[,<span class="dv">10</span>], <span class="dt">frequency =</span> <span class="dv">24</span>)
+Eixample_NO2_2018_09_ts &lt;-<span class="st"> </span><span class="kw">ts</span>(Eixample_NO2_2018_<span class="dv">09</span>[,<span class="dv">10</span>], <span class="dt">frequency =</span> <span class="dv">24</span>)</code></pre></div>
+<p>I am going to plot each time series now to see how they look:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">autoplot</span>(Eixample_NO2_ts)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">autoplot</span>(Eixample_NO2_2018_ts)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">autoplot</span>(Eixample_NO2_2018_09_ts)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p>I am going to input NA values by using interpolation method:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_2014_2018_NO2_Eixample_intp &lt;-<span class="st"> </span><span class="kw">na.interpolation</span>(Eixample_NO2_ts)
+imp_2018_NO2_Eixample_intp &lt;-<span class="st"> </span><span class="kw">na.interpolation</span>(Eixample_NO2_2018_ts)
+imp_2018_09_NO2_Eixample_intp &lt;-<span class="st"> </span><span class="kw">na.interpolation</span>(Eixample_NO2_2018_09_ts)</code></pre></div>
+<p>I’m going to plot one time series with the na interpolations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.imputations</span>(<span class="dt">x.withNA =</span> Eixample_NO2_2018_09_ts, <span class="dt">x.withImputations =</span> imp_2018_09_NO2_Eixample_intp)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>Decomposition of an additive times series for the month long period:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_Comp &lt;-<span class="st"> </span><span class="kw">decompose</span>(imp_2018_09_NO2_Eixample_intp)
+<span class="kw">plot</span>(Eixample_NO2_Comp)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p>We observe the daily seasonality in the decomposition.</p>
+<p>Also I can see the trend, seasonality, and what is the autocorrelation level or the linear relationship between lagged values of our time series.</p>
+<p>I will plot the autocorrelation coefficients or a correlogram to show the autocorrelation function or ACF.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggAcf</span>(imp_2014_2018_NO2_Eixample_intp)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p>We observe that we have at least a daily seasonality with peaks in lag=24 and multiples. We also have a trend, because the autocorrelations for small lags are large and positive, and observations nearby in time are similar size that decrease as the lags increase. The lags decrease because of the trend, and they have a “scalloped” shape due to the seasonality, in lag=24 and multiples.</p>
+<p>To evaluate the model, I am going to generate 3 training sets, and see what works best.</p>
+<p>Train1: 2014-01 to 2018-11, Test: 2018-12 Train2: 2018-01 to 2018-11, Test: 2018-12 Train3: 2018-09-1 to 2018-09-27, Test: 2018-09-28 to 2018-09-30</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train1 &lt;-<span class="st"> </span><span class="kw">subset</span>(imp_2014_2018_NO2_Eixample_intp, <span class="dt">end=</span><span class="kw">length</span>(imp_2014_2018_NO2_Eixample_intp)<span class="op">-</span><span class="dv">31</span><span class="op">*</span><span class="dv">24</span>)
+train2 &lt;-<span class="st"> </span><span class="kw">subset</span>(imp_2018_NO2_Eixample_intp, <span class="dt">end =</span> <span class="kw">length</span>(imp_2018_NO2_Eixample_intp) <span class="op">-</span><span class="st"> </span><span class="dv">31</span><span class="op">*</span><span class="dv">24</span>)
+train3 &lt;-<span class="st"> </span><span class="kw">subset</span>(imp_2018_09_NO2_Eixample_intp, <span class="dt">end =</span> <span class="kw">length</span>(imp_2018_09_NO2_Eixample_intp) <span class="op">-</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span><span class="dv">24</span>)</code></pre></div>
+<p>I am going to create a very simple baseline with some simple forecasting methods like naive, seasonal naive, and average methods, and we are going to compare them.</p>
+<p>I will first create a very basic model using the average method.</p>
+<p>For train1 dataset, with 4 year data, we are going to try forecasting 24 h.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcavg1 &lt;-<span class="st"> </span><span class="kw">meanf</span>(train1, <span class="dt">h=</span><span class="dv">24</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkresiduals</span>(fcavg1)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from Mean
+## Q* = 286600, df = 47, p-value &lt; 2.2e-16
+## 
+## Model df: 1.   Total lags used: 48</code></pre>
+<p>The residuals seem to be strongly correlated and the mean is not zero, so there is a lot of room for improvement.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acavg1 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fcavg1,imp_2014_2018_NO2_Eixample_intp)
+acavg1</code></pre></div>
+<pre><code>##                         ME     RMSE      MAE       MPE     MAPE      MASE
+## Training set -2.422543e-15 23.41828 18.52812 -17.83864 38.20774 0.9465105
+## Test set      8.878874e+00 14.60153 11.09775  10.51279 14.78259 0.5669293
+##                  ACF1 Theil&#39;s U
+## Training set 0.914165        NA
+## Test set     0.761984  1.464202</code></pre>
+<p>I will create the average model for the other two training sets:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcavg2 &lt;-<span class="st"> </span><span class="kw">meanf</span>(train2, <span class="dt">h=</span><span class="dv">24</span>)
+acavg2 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fcavg2,imp_2018_NO2_Eixample_intp)
+acavg2</code></pre></div>
+<pre><code>##                        ME     RMSE      MAE       MPE     MAPE      MASE
+## Training set 9.083770e-16 22.69295 18.01841 -17.26566 37.58413 0.9096043
+## Test set     2.547705e+01 33.06056 29.48470  24.23142 32.86620 1.4884445
+##                   ACF1 Theil&#39;s U
+## Training set 0.9048683        NA
+## Test set     0.8842593  2.486766</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcavg3 &lt;-<span class="st"> </span><span class="kw">meanf</span>(train3, <span class="dt">h=</span><span class="dv">24</span>)
+acavg3 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fcavg3,imp_2018_09_NO2_Eixample_intp)
+acavg3</code></pre></div>
+<pre><code>##                        ME     RMSE      MAE         MPE     MAPE      MASE
+## Training set 1.786583e-15 19.16832 15.04658 -12.1881287 30.19554 0.9039163
+## Test set     2.898148e+00 12.92619 10.29205   0.4973661 17.13705 0.6182901
+##                   ACF1 Theil&#39;s U
+## Training set 0.8797162        NA
+## Test set     0.6311693   1.24153</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">autoplot</span>(fcavg3)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p>The best model so far is fcavg3 with RMSE 12.92, but it can be surely improved,so I will now try the Seasonal Naïve METHOD.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcsn1 &lt;-<span class="st"> </span><span class="kw">snaive</span>(train1, <span class="dt">h =</span> <span class="dv">24</span>)
+acsnm1 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fcsn1,imp_2014_2018_NO2_Eixample_intp)
+acsnm1</code></pre></div>
+<pre><code>##                        ME     RMSE      MAE       MPE     MAPE     MASE
+## Training set -0.007520891 25.62021 19.57519 -10.65701 37.41261 1.000000
+## Test set     -7.437500000 28.88746 24.85417 -16.72899 37.18899 1.269677
+##                   ACF1 Theil&#39;s U
+## Training set 0.8823099        NA
+## Test set     0.8019205  3.637674</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcsn2 &lt;-<span class="st"> </span><span class="kw">snaive</span>(train2, <span class="dt">h =</span> <span class="dv">24</span>)
+acsnm2 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fcsn2,imp_2018_NO2_Eixample_intp)
+acsnm2</code></pre></div>
+<pre><code>##                       ME     RMSE      MAE        MPE     MAPE     MASE
+## Training set -0.05061311 25.99450 19.80907 -10.846521 38.01660 1.000000
+## Test set     11.56250000 24.75265 21.56250   6.647138 27.10735 1.088517
+##                   ACF1 Theil&#39;s U
+## Training set 0.8772091        NA
+## Test set     0.8161219  2.257468</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcsn3 &lt;-<span class="st"> </span><span class="kw">snaive</span>(train3, <span class="dt">h =</span> <span class="dv">24</span>)
+acsnm3 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fcsn3,imp_2018_09_NO2_Eixample_intp)
+acsnm3</code></pre></div>
+<pre><code>##                      ME     RMSE      MAE       MPE     MAPE      MASE
+## Training set 0.06971154 22.40050 16.64599 -7.896603 31.45541 1.0000000
+## Test set     8.47916667 14.39133 11.85417 12.677672 19.96869 0.7121333
+##                   ACF1 Theil&#39;s U
+## Training set 0.8489884        NA
+## Test set     0.5685643  1.337942</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">autoplot</span>(fcsn3)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p>It seems that the Seasonal Naive Method has not improved much the mean method, as so far the best model has been the mean model fcavg3 with 1 month training set (train3) with RMSE of 12.92.</p>
+<p>I am now going to try some exponential smoothing forecasting methods. Forecasts produced using exponential smoothing methods are weighted averages of past observations, with the weights decaying exponentially as the observations get older. The more recent the observation, the higher the associated weight.</p>
+<p>The Holt-Winters seasonal method comprises the forecast equation and three smoothing equations — one for the level ℓt, one for the trend bt, and one for the seasonal component st, with corresponding smoothing parameters α, β∗ and γ. We use m to denote the frequency of the seasonality, i.e., the number of seasons in a year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fhw1 &lt;-<span class="st"> </span><span class="kw">hw</span>(train1, <span class="dt">seasonal =</span> <span class="st">&quot;additive&quot;</span>, <span class="dt">h =</span> <span class="dv">24</span>)</code></pre></div>
+<p>Check that the residuals look like white noise</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkresiduals</span>(fhw1)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from Holt-Winters&#39; additive method
+## Q* = 3918.2, df = 20, p-value &lt; 2.2e-16
+## 
+## Model df: 28.   Total lags used: 48</code></pre>
+<p>Calculate the accuracy of the model</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">achw1 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fhw1, imp_2014_2018_NO2_Eixample_intp)
+achw1</code></pre></div>
+<pre><code>##                       ME      RMSE       MAE        MPE     MAPE      MASE
+## Training set  0.08692546  9.565536  6.566569  -1.258247 12.18857 0.3354537
+## Test set     -6.45561654 12.456080 10.417207 -10.823803 15.88906 0.5321638
+##                   ACF1 Theil&#39;s U
+## Training set 0.1105364        NA
+## Test set     0.7773539  1.593672</code></pre>
+<p>I will do the same for the training period 2 (for whole year 2018)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fhw2 &lt;-<span class="st"> </span><span class="kw">hw</span>(train2, <span class="dt">seasonal =</span> <span class="st">&quot;additive&quot;</span>, <span class="dt">h =</span> <span class="dv">24</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">achw2 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fhw2, imp_2018_NO2_Eixample_intp)
+achw2</code></pre></div>
+<pre><code>##                      ME      RMSE      MAE       MPE     MAPE      MASE
+## Training set  0.1352854  9.345555  6.14209 -1.093629 11.29442 0.3100646
+## Test set     -1.8618327 17.345534 14.38008 -9.296462 21.50013 0.7259340
+##                     ACF1 Theil&#39;s U
+## Training set 0.008890979        NA
+## Test set     0.887359709  2.104266</code></pre>
+<p>I will do the same for the training period 3 (for september 2018)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fhw3 &lt;-<span class="st"> </span><span class="kw">hw</span>(train3, <span class="dt">seasonal =</span> <span class="st">&quot;additive&quot;</span>, <span class="dt">h =</span> <span class="dv">24</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">autoplot</span>(fhw3)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkresiduals</span>(fhw3)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from Holt-Winters&#39; additive method
+## Q* = 74.873, df = 20, p-value = 2.861e-08
+## 
+## Model df: 28.   Total lags used: 48</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">achw3 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fhw3, imp_2018_09_NO2_Eixample_intp)
+achw3</code></pre></div>
+<pre><code>##                      ME     RMSE      MAE       MPE     MAPE      MASE
+## Training set -0.4031084 8.491798 5.760773 -1.976917 10.81360 0.3460756
+## Test set     -3.5367808 9.931202 8.256685 -9.041486 15.23381 0.4960163
+##                     ACF1 Theil&#39;s U
+## Training set 0.007553314        NA
+## Test set     0.401247312  1.104942</code></pre>
+<p>With Holt-Winters seasonal additive method, we get the best RMSE = 9.93 so far, with train set 3 (September 2018). The residuals look like white noise, with small autocorrelation coefficients under 0.1 and with mean centered in 0.</p>
+<p>Exponential smoothing methods can have multiple variations depending of the combinations of the trend and seasonality being additive or multiplicative. So Seasonal Holt-Winders is an additive trend and additive seasonal method, but for example I could have a (A,M) method, which would have a additive trend and multiplicative seasonality.</p>
+<p>Also a model can have an additive or multiplicative error, adding a third parameter to the exponential smoothing methods, the error. They are called also ETS, for error, trend and seasonality. The possibilities for each component are: Error ={A,M}, Trend ={N,A,Ad} and Seasonal ={N,A,M}.</p>
+<p>I wil use the ETS method to forecast our time series:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitets1 &lt;-<span class="st"> </span><span class="kw">ets</span>(train1)
+e1 &lt;-<span class="st"> </span>fitets1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(imp_2014_2018_NO2_Eixample_intp)
+e1</code></pre></div>
+<pre><code>##                       ME     RMSE       MAE        MPE     MAPE      MASE
+## Training set  -0.0876561  9.77353  6.607668  -1.621631 11.86540 0.3375532
+## Test set     -11.5514832 17.08266 13.978419 -18.195275 21.49077 0.7140886
+##                   ACF1 Theil&#39;s U
+## Training set 0.1423023        NA
+## Test set     0.7927134  2.196444</code></pre>
+<p>With 4 years training, it returns an ETS(M,N,M) model with no white noise(p-value &lt; 2.2e-16) and RMSE = 17.08266.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitets2 &lt;-<span class="st"> </span><span class="kw">ets</span>(train2)
+e2 &lt;-<span class="st"> </span>fitets2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(imp_2018_NO2_Eixample_intp)
+e2</code></pre></div>
+<pre><code>##                        ME      RMSE       MAE       MPE     MAPE      MASE
+## Training set  0.002282833  9.395696  6.188579 -1.385050 11.37992 0.3124114
+## Test set     -1.286698541 17.324459 14.446887 -8.612021 21.53933 0.7293068
+##                    ACF1 Theil&#39;s U
+## Training set 0.01930377        NA
+## Test set     0.88231930  2.099396</code></pre>
+<p>With 11 months training, it returns an ETS(M,N,A) model with no white noise (p-value &lt; 2.2e-16) and RMSE = 18.213865.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitets3 &lt;-<span class="st"> </span><span class="kw">ets</span>(train3)
+fitets3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fitets3)</code></pre></div>
+<pre><code>## ETS(M,Ad,M) 
+## 
+## Call:
+##  ets(y = train3) 
+## 
+##   Smoothing parameters:
+##     alpha = 0.8487 
+##     beta  = 1e-04 
+##     gamma = 2e-04 
+##     phi   = 0.9799 
+## 
+##   Initial states:
+##     l = 36.9071 
+##     b = 1.0543 
+##     s = 0.8994 0.9476 0.9705 0.9927 1.025 1.0601
+##            1.0669 1.109 1.1557 1.2327 1.0738 1.0313 0.9797 0.9651 0.8508 0.819 0.8417 0.9776 1.0493 1.1546 1.1029 0.9667 0.8884 0.8395
+## 
+##   sigma:  0.1586
+## 
+##      AIC     AICc      BIC 
+## 7018.535 7021.549 7152.751 
+## 
+## Training set error measures:
+##                       ME     RMSE      MAE       MPE    MAPE      MASE
+## Training set -0.04703844 8.779863 5.954116 -1.439148 10.9715 0.3576907
+##                    ACF1
+## Training set 0.05729307</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e3 &lt;-<span class="st"> </span>fitets3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(imp_2018_09_NO2_Eixample_intp)
+e3</code></pre></div>
+<pre><code>##                       ME     RMSE      MAE       MPE     MAPE      MASE
+## Training set -0.04703844 8.779863 5.954116 -1.439148 10.97150 0.3576907
+## Test set     -1.93475890 9.452193 8.034722 -6.176874 14.46853 0.4826820
+##                    ACF1 Theil&#39;s U
+## Training set 0.05729307        NA
+## Test set     0.40502783  1.025611</code></pre>
+<p>With one month training, it returns an ETS(M, Ad, M) model with no white noise (p-value = 7.387e-10) and RMSE = 9.452193</p>
+<p>Still, for some reason the forecast plot doesn’t look too good, I wonder if the time series is stationary or white noise and don’t have a predictable patter in the long term.</p>
+<p>I will perform the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test (Kwiatkowski, Phillips, Schmidt, &amp; Shin, 1992). In this test, the null hypothesis is that the data are stationary, and we look for evidence that the null hypothesis is false. Consequently, small p-values (e.g., less than 0.05) suggest that differencing is required.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ur.kpss</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</code></pre></div>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 18 lags. 
+## 
+## Value of test-statistic is: 1.9162 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<p>Value of test-statistic is: 1.9162 so we can discard that it’s a stationary time series.</p>
+<p>We can transform non-stationary to stationary by computing the differences between consecutive observations, and stabilising the variance of the time series. Differencing can help stabilise the mean of a time series by removing changes in the level of a time series, and therefore eliminating (or reducing) trend and seasonality.</p>
+<p>I will apply a seasonal ARIMA model next to our training sets. The seasonal ARIMA models have two sets of parameters (p,d,q)(P,D,Q), p related to the order of the autorregression or AR part, d if differencing is required and q to the order of the moving average part. P,D,Q are referring to the seasonal part of the model.</p>
+<p>I will use the autorima function to see what kind of model is best:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitautoarima1 &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(train1)
+<span class="kw">checkresiduals</span>(fitautoarima1)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(5,1,0)(2,0,0)[24]
+## Q* = 1877.1, df = 41, p-value &lt; 2.2e-16
+## 
+## Model df: 7.   Total lags used: 48</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a1 &lt;-<span class="st"> </span>fitautoarima1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(imp_2014_2018_NO2_Eixample_intp)
+a1</code></pre></div>
+<pre><code>##                         ME      RMSE       MAE        MPE     MAPE
+## Training set -7.712129e-04  9.407624  6.288977  -1.604437 11.39849
+## Test set     -1.422385e+01 18.928269 16.284145 -24.258515 26.54918
+##                   MASE         ACF1 Theil&#39;s U
+## Training set 0.3212729 -0.005603022        NA
+## Test set     0.8318769  0.785648127  2.580245</code></pre>
+<p>The proposed model parameters are ARIMA(5,1,0)(2,0,0)[24], so it proposes 1 differencing in the non-seasonal part of the mdel, and the order of the moving average is 0 in both parts. The autoregression order of the non-seasonal is 5, and the AR order of the seasonal 2.</p>
+<p>The RMSE is 18.928269, which is higher than ETS models tried before.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitautoarima2 &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(train2)
+a2 &lt;-<span class="st"> </span>fitautoarima2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(imp_2018_NO2_Eixample_intp)
+a2</code></pre></div>
+<pre><code>##                        ME      RMSE       MAE       MPE     MAPE      MASE
+## Training set -0.002544305  9.456613  6.240959 -2.874205 11.67962 0.3150557
+## Test set     16.194115132 27.989931 23.433718 12.080689 27.47259 1.1829794
+##                      ACF1 Theil&#39;s U
+## Training set 6.401545e-05        NA
+## Test set     8.965193e-01  2.270977</code></pre>
+<p>With training set 2, the model proposed is an ARIMA(1,0,1)(2,0,0)[24]. No differencing was required, and the AR is 1 in the non-seasonal part, 2 in the seasonal part. It has included one order of the MA part. The RMSE=27.99 is very high, so it doesn’t look like a good model.</p>
+<p>I will finish with the training set 3, which is for the month of september 2018.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitautoarima3 &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(train3)
+<span class="kw">summary</span>(fitautoarima3)</code></pre></div>
+<pre><code>## Series: train3 
+## ARIMA(1,0,0)(0,0,1)[24] with non-zero mean 
+## 
+## Coefficients:
+##          ar1    sma1     mean
+##       0.8750  0.1487  57.0521
+## s.e.  0.0191  0.0380   3.1789
+## 
+## sigma^2 estimated as 80.31:  log likelihood=-2340.01
+## AIC=4688.02   AICc=4688.08   BIC=4705.91
+## 
+## Training set error measures:
+##                      ME     RMSE      MAE       MPE     MAPE      MASE
+## Training set 0.06438725 8.940968 6.024999 -2.479659 11.34568 0.3619489
+##                    ACF1
+## Training set 0.01792237</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fitautoarima3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h=</span><span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a3 &lt;-<span class="st"> </span>fitautoarima3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">24</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(imp_2018_09_NO2_Eixample_intp)
+a3</code></pre></div>
+<pre><code>##                      ME      RMSE      MAE       MPE     MAPE      MASE
+## Training set 0.06438725  8.940968 6.024999 -2.479659 11.34568 0.3619489
+## Test set     3.36878022 12.348736 9.861870  1.601082 16.22775 0.5924471
+##                    ACF1 Theil&#39;s U
+## Training set 0.01792237        NA
+## Test set     0.61470284  1.177736</code></pre>
+<p>For a training period of one month, the ARIMA(1,0,0)(0,0,1)[24] is chosen. Just one order of the AR non seasonal part, and one order of the MA seasonal part. The error RMSE= 12.34 seems to improve the other ARIMA models but it’s still worse than the ETS model.</p>
+<p>This is not the result I was expecting and my hypothesis is that the times series have a multiple seasonality. With pollution data, we have a case of multiple seasonality with daily, weekly and yearly seasons. To deal with these maybe I should adapt my models to different training sets to avoid multiple seasonalities. If the time series is relatively short so that only one type of seasonality is present, then maybe it will be possible to use one of the single-seasonal methods like ETS or a seasonal ARIMA model.</p>
+<p>But when the time series is long enough so that multiple seasonal periods appear, it will be necessary to use STL, dynamic harmonic regression or TBATS.</p>
+<p>I am going to try the TBATS model, which is an automated method that uses a combination of Fourier terms with an exponential smoothing state space model and a Box-Cox transformation, in a completely automated manner.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tbats</span>() -&gt;<span class="st"> </span>fit_tbats
+<span class="kw">summary</span>(fit_tbats)</code></pre></div>
+<pre><code>##                   Length  Class  Mode     
+## lambda                  1 -none- numeric  
+## alpha                   1 -none- numeric  
+## beta                    1 -none- numeric  
+## damping.parameter       1 -none- numeric  
+## gamma.one.values        1 -none- numeric  
+## gamma.two.values        1 -none- numeric  
+## ar.coefficients         3 -none- numeric  
+## ma.coefficients         1 -none- numeric  
+## likelihood              1 -none- numeric  
+## optim.return.code       1 -none- numeric  
+## variance                1 -none- numeric  
+## AIC                     1 -none- numeric  
+## parameters              2 -none- list     
+## seed.states            28 -none- numeric  
+## fitted.values       43104 ts     numeric  
+## errors              43104 ts     numeric  
+## x                 1206912 -none- numeric  
+## seasonal.periods        1 -none- numeric  
+## k.vector                1 -none- numeric  
+## y                   43104 ts     numeric  
+## p                       1 -none- numeric  
+## q                       1 -none- numeric  
+## call                    2 -none- call     
+## series                  1 -none- character
+## method                  1 -none- character</code></pre>
+<p>It’s interesting because the TBATS model returns a model TBATS(0.3, {3,1}, 0.904, {&lt;24,11&gt;}), which it only includes 1 seasonality of 24 hours, and I know there are at least a weekly and a yearly seasonality.Box-Cox parameter is 0.3, and the damping parameter 0.904. It’s a order 3 for AR and 1 for MA part.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tbats</span>() -&gt;<span class="st"> </span>fit_tbats3
+fc3 &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit_tbats3, <span class="dt">h=</span><span class="dv">24</span>)
+<span class="kw">autoplot</span>(fc3)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acctbats3 &lt;-<span class="st"> </span><span class="kw">accuracy</span>(fc3,imp_2018_09_NO2_Eixample_intp)
+acctbats3</code></pre></div>
+<pre><code>##                     ME      RMSE      MAE        MPE     MAPE      MASE
+## Training set 0.4618859  8.560919 5.939985 -0.9305555 10.85752 0.3568417
+## Test set     3.4389851 10.318737 8.345038  2.8415146 13.33396 0.5013241
+##                     ACF1 Theil&#39;s U
+## Training set -0.03884427        NA
+## Test set      0.50384759 0.9649302</code></pre>
+<p>The TBATS model resulted with training period of one month is a TBATS(0.113, {0,0}, 0.8, {24,7}), with just one seasonality of 24 hours, no AR or MA component, and significant 0.113 Cox-Box transformation component, with 0.8 damping parameter. The RMSE is 10.31, which is worse than the one I got with ETS(M, Ad, M) model, with RMSE = 9.452193.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-exploration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

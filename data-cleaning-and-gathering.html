@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 2 Data cleaning and gathering | Air pollution in Barcelona</title>
+  <meta name="description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 2 Data cleaning and gathering | Air pollution in Barcelona" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data cleaning and gathering | Air pollution in Barcelona" />
+  
+  <meta name="twitter:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+<meta name="author" content="Jone Lerchundi">
+
+
+<meta name="date" content="2019-06-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intro.html">
+<link rel="next" href="data-exploration.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Air pollution in Barcelona</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#scope"><i class="fa fa-check"></i><b>1.2</b> Scope</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#approach"><i class="fa fa-check"></i><b>1.3</b> Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html"><i class="fa fa-check"></i><b>2</b> Data cleaning and gathering</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#pollution"><i class="fa fa-check"></i><b>2.1.1</b> Pollution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#weather-data"><i class="fa fa-check"></i><b>2.1.2</b> Weather data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#hospitalizations-in-barcelona"><i class="fa fa-check"></i><b>2.1.3</b> Hospitalizations in Barcelona</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#initial-data-cleansing-and-analysis"><i class="fa fa-check"></i><b>2.2</b> Initial data cleansing and analysis</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#missing-values-management---package-imputets"><i class="fa fa-check"></i><b>2.2.1</b> Missing values management - package imputeTS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>3</b> Data exploration</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-exploration.html"><a href="data-exploration.html#general-exploration"><i class="fa fa-check"></i><b>3.1</b> General exploration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-exploration.html"><a href="data-exploration.html#weather-and-pollution"><i class="fa fa-check"></i><b>3.2</b> Weather and pollution</a></li>
+<li class="chapter" data-level="3.3" data-path="data-exploration.html"><a href="data-exploration.html#health-and-pollution"><i class="fa fa-check"></i><b>3.3</b> Health and pollution</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>4</b> Forecasting</a></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a><ul>
+<li class="chapter" data-level="5.1" data-path="conclusions.html"><a href="conclusions.html#data-quality"><i class="fa fa-check"></i><b>5.1</b> Data Quality</a></li>
+<li class="chapter" data-level="5.2" data-path="conclusions.html"><a href="conclusions.html#which-days-of-the-week-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.2</b> Which days of the week have the cleanest air?</a></li>
+<li class="chapter" data-level="5.3" data-path="conclusions.html"><a href="conclusions.html#which-months-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.3</b> Which months have the cleanest air?</a></li>
+<li class="chapter" data-level="5.4" data-path="conclusions.html"><a href="conclusions.html#what-time-of-the-day-is-the-most-polluted-and-the-cleanest"><i class="fa fa-check"></i><b>5.4</b> What time of the day is the most polluted? And the cleanest?</a></li>
+<li class="chapter" data-level="5.5" data-path="conclusions.html"><a href="conclusions.html#compliance-with-eu-air-quality-legislation"><i class="fa fa-check"></i><b>5.5</b> Compliance with EU Air Quality Legislation?</a></li>
+<li class="chapter" data-level="5.6" data-path="conclusions.html"><a href="conclusions.html#weather-impacts-to-pollution"><i class="fa fa-check"></i><b>5.6</b> Weather impacts to pollution</a></li>
+<li class="chapter" data-level="5.7" data-path="conclusions.html"><a href="conclusions.html#pollutions-relationship-with-medical-issues"><i class="fa fa-check"></i><b>5.7</b> Pollution’s relationship with medical issues</a></li>
+<li class="chapter" data-level="5.8" data-path="conclusions.html"><a href="conclusions.html#forecasting-pollution"><i class="fa fa-check"></i><b>5.8</b> Forecasting pollution</a></li>
+<li class="chapter" data-level="5.9" data-path="conclusions.html"><a href="conclusions.html#next-steps"><i class="fa fa-check"></i><b>5.9</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>6</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Air pollution in Barcelona</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-cleaning-and-gathering" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Data cleaning and gathering</h1>
+<div id="data" class="section level2">
+<h2><span class="header-section-number">2.1</span> Data</h2>
+<p>The datasets I have used for this project are:</p>
+<ul>
+<li>Pollution in Barcelona since 1991 (source:Generalitat de Catalunya).</li>
+<li>Weather conditions in Barcelona city (source:Servei Metereologic de Catalunya).</li>
+<li>Hospitalizations due to respiratory and heart problems in Barcelona (source:Observatori del Sistema de Salut de Catalunya).</li>
+</ul>
+<p>You can find all the datasets <a href="https://drive.google.com/drive/folders/1cMVdsGR0uyOaSHzp7te_cL15_aE1rPYF?usp=sharing">here</a>)</p>
+<div id="pollution" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Pollution</h3>
+<p>The “Secció d’Immissions” from Servei de Vigilància i Control de l’Aire department of Generalitat de Catalunya, gave me access to the pollution historical data.</p>
+<p>The dataset contains all air quality measurements performed in an hourly manner for multiple pollutants, and in several stations in all Catalunya since 1991.</p>
+<p>Given the size of the file, I have done the initial analysis of the data in Python using Jupyter notebook, in order to subset the data in smaller datasets and then perform exploratory analysis of the data with R Studio. You can check the initial analysis in the jupyter notebook <a href="https://github.com/Ionetxu/Project_AIR/blob/master/Python_initial_analysis.ipynb">“Python_initial_analysis.ipynb”</a>.</p>
+<p>The initial dataset is a table with 5,154,117 rows and 70 columns, as the hourly observation values for each station are written as column values. To subset the dataset in smaller ones, I have first filtered the data for stations only in the city of Barcelona, and then filtered the pollutants I’m most interested in, which are NO2 and PM10. After melting the data to have one column for each pollutant concentration value only, I have written smaller datasets which I will analyze in R.</p>
+<p>I will not to pursue analyzing the pollutant PM2.5 as there are only observations between 2002 and 2005, and there is no hourly measurements of PM2.5 currently.</p>
+<p>This is really unfortunate as PM2.5, the particulate matter with a diameter of less than 2.5 micrometers, are of biggest concern in other cities as they are linked to premature death from heart and lung disease. Since they are so small, they tend to stay longer in the air (they can stay in the air for days or weeks) than heavier particles, with increased chance of humans inhaling them into the bodies. And because they are so small, they can penetrate deep into the lungs and even enter the circulatory system.</p>
+<p>PM10 are the coarse particles that are between 2.5 and 10 micrometers.These particles can also penetrate deep into the lungs and can cause multiple respiratory issues.</p>
+<p>Nitrogen Dioxide (NO2) is one of a group of highly reactive gases known as oxides of nitrogen or nitrogen oxides (NOx). NO2 primarily gets in the air from the burning of fuel. NO2 forms from emissions from cars, trucks and buses, power plants, and off-road equipment.</p>
+<p>Breathing air with a high concentration of NO2 can irritate airways in the human respiratory system. Such exposures over short periods can aggravate respiratory diseases, particularly asthma, leading to respiratory symptoms (such as coughing, wheezing or difficulty breathing), hospital admissions and visits to emergency rooms. Longer exposures to elevated concentrations of NO2 may contribute to the development of asthma and potentially increase susceptibility to respiratory infections. People with asthma, as well as children and the elderly are generally at greater risk for the health effects of NO2.</p>
+<p>According to the dataset there are 11 stations in the city of Barcelona.</p>
+<ul>
+<li>St.Gervasi</li>
+<li>Poblenou</li>
+<li>Sagrera</li>
+<li>Sants</li>
+<li>Eixample</li>
+<li>Gracia-Sant Gervasi</li>
+<li>Ciutatella</li>
+<li>Torre Girona</li>
+<li>Parc Vall Hebron</li>
+<li>Palau Reial</li>
+<li>Observatori Fabra</li>
+</ul>
+<p>Some of them are not currently working like St. Gervasi or Sagrera. Note that my main analysis has focused in Eixample data, as it’s one of the most polluted and centric station in the city of Barcelona.</p>
+</div>
+<div id="weather-data" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Weather data</h3>
+<p>I have sourced meterological data in Barcelona from Servei Metereologic de Catalunya. The dataset includes data from 2014 to 2019 with half hourly observations from multiple measuring stations in the city. I have chosen the station in the neighborhood of Raval for my analysis, due to its proximity with Eixample station and to be able to compare the data better. The multiple variables in the dataset are related to temperature, atmospheric presure, precipitation, average humidity,and wind speed and direction.</p>
+</div>
+<div id="hospitalizations-in-barcelona" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Hospitalizations in Barcelona</h3>
+<p>Observatori del Sistema de Salut de Catalunya provided me an excel file with the number of daily hospitalizations due to respiratory and heart issues from 2014 to end of 2017 in the city of Barcelona. I will use this data to see how it’s relating to NO2 and PM10 pollutants and their correlation levels.</p>
+</div>
+</div>
+<div id="initial-data-cleansing-and-analysis" class="section level2">
+<h2><span class="header-section-number">2.2</span> Initial data cleansing and analysis</h2>
+<p>You can find this R script here <a href="INSERT%20LINK">R_NO2_first_analysis.R</a>.</p>
+<p>I start by loading the data related to pollutant NO2 and renaming the features of the dataset. Please load the file “airNO2.csv”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(purrr)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(knitr)
+<span class="kw">library</span>(xts)
+<span class="kw">library</span>(zoo)
+<span class="kw">library</span>(gridExtra)
+<span class="kw">library</span>(fpp2)
+<span class="kw">library</span>(RcppRoll)
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(imputeTS)
+airNO2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/airNO2.csv&#39;</span>)</code></pre></div>
+<p>Giving new column names by using dplyr:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airNO2 &lt;-<span class="st"> </span>airNO2 <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">measurement_code=</span><span class="st">&#39;CODI MESURAMENT&#39;</span>,
+                                    <span class="dt">pollutant=</span><span class="st">&#39;CONTAMINANT&#39;</span>,
+                                    <span class="dt">station_code =</span> <span class="st">&#39;CODI ESTACIÓ&#39;</span>,
+                                    <span class="dt">station_name =</span> <span class="st">&#39;NOM ESTACIÓ&#39;</span>,
+                                    <span class="dt">latitude =</span> <span class="st">&#39;LATITUD&#39;</span>,
+                                    <span class="dt">longitude =</span> <span class="st">&#39;LONGITUD&#39;</span>,
+                                    <span class="dt">unit =</span> <span class="st">&#39;UNITATS&#39;</span>,
+                                    <span class="dt">year =</span> <span class="st">&#39;ANY&#39;</span>,
+                                    <span class="dt">month =</span> <span class="st">&#39;MES&#39;</span>,
+                                    <span class="dt">day =</span> <span class="st">&#39;DIA&#39;</span>,
+                                    <span class="dt">dt =</span> <span class="st">&#39;DATA&#39;</span>,
+                                    <span class="dt">time =</span> <span class="st">&#39;HORA&#39;</span>,
+                                    <span class="dt">value =</span> <span class="st">&#39;VALOR&#39;</span>)</code></pre></div>
+<p>I am going to change the station names and will fix typos ( there are two different names for the same station code 44, “Barcelona (Gràcia - Sant Gervasi)”&quot; and “Barcelona (Gracia - Sant Gervasi)”. Therefore I will create a station dictionary with more convenient station names.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">station_dict &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">station_code =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">39</span>,<span class="dv">42</span>,<span class="dv">43</span>,<span class="dv">44</span>,<span class="dv">50</span>,<span class="dv">54</span>,<span class="dv">56</span>,<span class="dv">57</span>,<span class="dv">58</span>),
+  <span class="dt">station_alias =</span> <span class="kw">c</span>(<span class="st">&quot;St.Gervasi&quot;</span>, <span class="st">&quot;Poblenou&quot;</span>, <span class="st">&quot;Sagrera&quot;</span>,<span class="st">&quot;Sants&quot;</span>, <span class="st">&quot;Eixample&quot;</span>,
+                    <span class="st">&quot;Gracia-Sant Gervasi&quot;</span>,<span class="st">&quot;Ciutatella&quot;</span>,<span class="st">&quot;Torre Girona&quot;</span>,
+                    <span class="st">&quot;Parc Vall Hebron&quot;</span>,<span class="st">&quot;Palau Reial&quot;</span>,
+                    <span class="st">&quot;Observatori Fabra&quot;</span>)
+)</code></pre></div>
+<p>Next I will join the station dictionary to the airNO2 dataframe with the new station names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airNO2 &lt;-<span class="st"> </span>airNO2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(station_dict, <span class="dt">by =</span> <span class="st">&#39;station_code&#39;</span>)</code></pre></div>
+<p>Next I will convert “Time”&quot; column in a better format concatenating minutes and seconds to have a datetime column. I will first take out a space of time column and make it hms format.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airNO2<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">paste</span>(airNO2<span class="op">$</span>time,<span class="st">&quot;:00:00&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<p>Going to include the time with the date in a new column dt using lubridate library:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airNO2<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">with</span>(airNO2, <span class="kw">ymd</span>(airNO2<span class="op">$</span>dt) <span class="op">+</span><span class="st"> </span><span class="kw">hms</span>(time))</code></pre></div>
+<p>Convert into POSIXct because Dplyer doesnt support POSIXlt</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airNO2<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(airNO2<span class="op">$</span>dt)
+<span class="kw">head</span>(airNO2<span class="op">$</span>dt)</code></pre></div>
+<pre><code>## [1] &quot;2019-03-23 UTC&quot; &quot;2019-03-23 UTC&quot; &quot;2019-03-23 UTC&quot; &quot;2019-03-23 UTC&quot;
+## [5] &quot;2019-03-23 UTC&quot; &quot;2019-03-23 UTC&quot;</code></pre>
+<p>We drop columns that we don’t need - measurement-code and station name &amp; sort columns</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airNO2_<span class="dv">1</span> &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(airNO2, <span class="op">-</span><span class="kw">c</span>( <span class="st">&quot;station_name&quot;</span>, <span class="st">&quot;time&quot;</span>))
+<span class="kw">summary</span>(airNO2_<span class="dv">1</span>)</code></pre></div>
+<pre><code>##  measurement_code    pollutant          station_code      latitude    
+##  Length:1702848     Length:1702848     Min.   : 3.00   Min.   :41.38  
+##  Class :character   Class :character   1st Qu.:42.00   1st Qu.:41.39  
+##  Mode  :character   Mode  :character   Median :44.00   Median :41.39  
+##                                        Mean   :40.51   Mean   :41.40  
+##                                        3rd Qu.:54.00   3rd Qu.:41.40  
+##                                        Max.   :58.00   Max.   :41.43  
+##                                                                       
+##    longitude         unit                year          month      
+##  Min.   :2.115   Length:1702848     Min.   :   2   Min.   : 1.00  
+##  1st Qu.:2.133   Class :character   1st Qu.:1997   1st Qu.: 3.00  
+##  Median :2.153   Mode  :character   Median :2004   Median : 6.00  
+##  Mean   :2.155                      Mean   :1838   Mean   : 6.47  
+##  3rd Qu.:2.187                      3rd Qu.:2011   3rd Qu.: 9.00  
+##  Max.   :2.205                      Max.   :2019   Max.   :12.00  
+##                                                                   
+##       day              dt                          value        
+##  Min.   : 1.00   Min.   :1991-01-01 01:00:00   Min.   :  0.0    
+##  1st Qu.: 8.00   1st Qu.:1999-11-04 00:45:00   1st Qu.: 25.0    
+##  Median :16.00   Median :2005-07-08 00:30:00   Median : 45.0    
+##  Mean   :15.71   Mean   :2005-10-01 15:49:31   Mean   : 49.4    
+##  3rd Qu.:23.00   3rd Qu.:2011-08-03 06:15:00   3rd Qu.: 68.0    
+##  Max.   :31.00   Max.   :2019-03-23 00:00:00   Max.   :483.0    
+##                                                NA&#39;s   :1036554  
+##              station_alias   
+##  Poblenou           :239160  
+##  Sants              :221616  
+##  Eixample           :195336  
+##  Gracia-Sant Gervasi:186552  
+##  Parc Vall Hebron   :184080  
+##  Ciutatella         :169032  
+##  (Other)            :507072</code></pre>
+<p>Let’s do an initial analysis of the data by plotting the data by station:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">St_gervasi_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">3</span>)
+Poblenou_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">4</span>)
+Sagrera_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">39</span>)
+Sants_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">42</span>)
+Eixample_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">43</span>)
+Gracia_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">44</span>)
+Ciutatella_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">50</span>)
+Torre_girona_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">54</span>)
+Vall_hebron_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">56</span>)
+Palau_reial_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">57</span>)
+Observ_fabra_NO2 &lt;-<span class="st"> </span>airNO2_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(station_code <span class="op">==</span><span class="st"> </span><span class="dv">58</span>)</code></pre></div>
+<p>For Poblenou station:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Poblenou_NO2_plt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(Poblenou_NO2, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(dt), <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">200</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">40</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">breaks=</span><span class="st">&#39;2 years&#39;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2(µg/m3) evolution - Poblenou&quot;</span>)
+Poblenou_NO2_plt</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>We can observe that in Poblenou there is data from 1991 to 2019, but there is no data for 2013.This is common to all stations.</p>
+<p>Also, I have included two red dotted lines, indicating EU air quality standards for <a href="http://ec.europa.eu/environment/air/quality/standards.htm">NO2</a>:</p>
+<ul>
+<li>Hourly limit for NO2 of 200 µg/m3 (18 Permitted exceedences each year).</li>
+<li>Average yearly limit of 40 µg/m3.</li>
+</ul>
+<p>In an initial look, it seems that all data are complying with the hourly limit of 200 µg/m3 in the recent years, but there are multiple values above the 200 µg/m3 mark in the initial years. It’s positive, it seems like the pollution has improved since early 1990s. The average concentration of NO2 is right on the limit of 40 µg/m3.</p>
+<p>I am going to plot the data for Eixample:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_plt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(Eixample_NO2, <span class="kw">aes</span>(<span class="dt">x =</span> dt, <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">200</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">40</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_datetime</span>(<span class="dt">breaks=</span><span class="st">&#39;2 years&#39;</span>,<span class="dt">date_labels =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2(µg/m3) - NO2 evolution in Eixample station&quot;</span>)
+Eixample_NO2_plt</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="672" /> For Eixample we have data from 1996 to 2019, but there is no data from 2009 to 2011, and for 2013. There are multiple values above the 200 µg/m3 mark between 1996 and 2012, but then the pollution peaks improve from 2014 to 2019. This is positive news. But the average curve is above the yearly average quality standard.</p>
+<p>Now I want to see the data more closely, so I will repeat the plot for Eixample but subsetting the data to just a week: I will define Start and end times for the subset as POSICXct objects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">startTime &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;2019-03-01 10:00:00&quot;</span>,<span class="dt">tz=</span><span class="st">&quot;UTC&quot;</span>)
+endTime &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;2019-03-8 10:00:00&quot;</span>,<span class="dt">tz=</span><span class="st">&quot;UTC&quot;</span>)</code></pre></div>
+<p>I will create a start and end time R object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start.end &lt;-<span class="st"> </span><span class="kw">c</span>(startTime,endTime)
+start.end</code></pre></div>
+<pre><code>## [1] &quot;2019-03-01 10:00:00 UTC&quot; &quot;2019-03-08 10:00:00 UTC&quot;</code></pre>
+<p>I have to format with time zone as otherwise ggplot2 doesnt deal with original date format</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">date_format_tz &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">format =</span> <span class="st">&quot;%Y-%m-%d&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>) {
+  <span class="cf">function</span>(x) <span class="kw">format</span>(x, format, <span class="dt">tz=</span>tz)
+}</code></pre></div>
+<p>I am now going to plot just for Eixample:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_subset_plt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(Eixample_NO2, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.POSIXct</span>(dt), <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">40</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2(µg/m3) - NO2 levels in March 2019 in Eixample&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>( <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">150</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_datetime</span>(<span class="dt">limits=</span>start.end,<span class="dt">breaks=</span><span class="st">&#39;24 hours&#39;</span>,<span class="dt">labels =</span> <span class="kw">date_format_tz</span>( <span class="st">&quot;%b</span><span class="ch">\n</span><span class="st">%d&quot;</span>))
+
+Eixample_NO2_subset_plt</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>This is a big finding, as I observe that there are no measurements taken between 1am and 10am systematically in any station, avoiding rush hour in the morning. This is bad news as we are not measuring the morning pollution peak due to morning rush hour.</p>
+<p>This also means that I’ll have big number of not assigned values, difficulting a good forecasting model.</p>
+<p>I have done similar cleansing and analysis for pollutant PM10 data. Please check the code in this R script in <a href="insert%20link">PM10 R_PM10_first_analysis.R</a>.</p>
+<p>After seeing the plots for PM10 for each and all stations, I have observed that there are two stations that are not capturing PM10 at all, which are Ciutatella and Vall Hebron, and other stations in which PM10 has been capturing on and off.</p>
+<p>Also similarly to NO2, the PM10 data has been only measured during the day between 10am and midnight 12am, missing all values between 1am and 10am (9 observations).</p>
+<div id="missing-values-management---package-imputets" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Missing values management - package imputeTS</h3>
+<p>In order to deal with the NA values I will use the imputeTS library, which deals with missing values in univariate time series using multiple imputation algorithms like ‘Mean’, ‘LOCF’, ‘Interpolation’, ‘Moving Average’, ‘Seasonal Decomposition’, ‘Kalman Smoothing on Structural Time Series models’, ‘Kalman Smoothing on ARIMA models’. It also provides useful tools to visualize and understand the NA-s distribution.</p>
+<p>I am going to create a TS object with assumption frequency= 24 (hourly measurements with 1 day seasonality). First I will try just a month, 20014 January, to test and see the results:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Poblenou_NO2_2014_<span class="dv">1</span> &lt;-<span class="st"> </span>Poblenou_NO2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="dv">2014</span> <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+Poblenou_NO2_2014_ts_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">ts</span>(Poblenou_NO2_2014_<span class="dv">1</span>[,<span class="dv">11</span>], <span class="dt">start =</span> <span class="kw">c</span>(<span class="dv">2014</span>, <span class="dv">1</span>), <span class="dt">frequency =</span> <span class="dv">24</span>)</code></pre></div>
+<p>Now I will analyze the NA-s with a distribution bar plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.distributionBar</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>, <span class="dt">breaks =</span> <span class="dv">31</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="672" /> Gapsize tells the distribution of the gapsizes in a time series:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.gapsize</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>We can also see some stats about the NA-s.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">statsNA</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] &quot;Length of time series:&quot;
+## [1] 744
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Number of Missing Values:&quot;
+## [1] 283
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Percentage of Missing Values:&quot;
+## [1] &quot;38%&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Stats for Bins&quot;
+## [1] &quot;  Bin 1 (186 values from 1 to 186) :      68 NAs (36.6%)&quot;
+## [1] &quot;  Bin 2 (186 values from 187 to 372) :      69 NAs (37.1%)&quot;
+## [1] &quot;  Bin 3 (186 values from 373 to 558) :      74 NAs (39.8%)&quot;
+## [1] &quot;  Bin 4 (186 values from 559 to 744) :      72 NAs (38.7%)&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Longest NA gap (series of consecutive NAs)&quot;
+## [1] &quot;9 in a row&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Most frequent gap size (series of consecutive NA series)&quot;
+## [1] &quot;9 NA in a row (occuring 31 times)&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Gap size accounting for most NAs&quot;
+## [1] &quot;9 NA in a row (occuring 31 times, making up for overall 279 NAs)&quot;
+## [1] &quot;-------------------------&quot;
+## [1] &quot;Overview NA series&quot;
+## [1] &quot;  2 NA in a row: 2 times&quot;
+## [1] &quot;  9 NA in a row: 31 times&quot;</code></pre>
+<p>We observe that the NA gap that repeats more is the gap of size 9, which are the gaps related to the absence of meditions from midnight to 10am.</p>
+<p>Not having data to test makes it difficult to choose a particular algorithm versus another, but I will try some and see how they look.</p>
+<p>I will impute NA values by values by mean algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_2014_1_NO2_Poblenou_mean &lt;-<span class="st"> </span><span class="kw">na.mean</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<p>Plot of data with NA-s vs data with imputations with mean values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.imputations</span>(<span class="dt">x.withNA =</span> Poblenou_NO2_2014_ts_<span class="dv">1</span>, <span class="dt">x.withImputations =</span> imp_2014_1_NO2_Poblenou_mean)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>I will impute NA values by Weighted Moving Average algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_2014_1_NO2_Poblenou_ma &lt;-<span class="st"> </span><span class="kw">na.ma</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<p>Plot of data with NA-s vs data with imputations with Weighted Moving Average values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.imputations</span>(<span class="dt">x.withNA =</span> Poblenou_NO2_2014_ts_<span class="dv">1</span>, <span class="dt">x.withImputations =</span> imp_2014_1_NO2_Poblenou_ma)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>I will impute NA values by Last Observation Carried Forward algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_2014_1_NO2_Poblenou_locf &lt;-<span class="st"> </span><span class="kw">na.locf</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<p>Plot of data with NA-s vs data with imputations by Last Observation Carried Forward algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.imputations</span>(<span class="dt">x.withNA =</span> Poblenou_NO2_2014_ts_<span class="dv">1</span>, <span class="dt">x.withImputations =</span> imp_2014_1_NO2_Poblenou_locf)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>I will impute NA values by kalman algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_2014_1_NO2_Poblenou_kalman &lt;-<span class="st"> </span><span class="kw">na.kalman</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<p>Plot of data with NA-s vs data with imputations with kalman algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.imputations</span>(<span class="dt">x.withNA =</span> Poblenou_NO2_2014_ts_<span class="dv">1</span>, <span class="dt">x.withImputations =</span> imp_2014_1_NO2_Poblenou_kalman)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="672" /> Some imputed values are negative, which is not a good outcome, so I will discard this method.</p>
+<p>I will impute NA values by interpolation algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_2014_1_NO2_Poblenou_intp &lt;-<span class="st"> </span><span class="kw">na.interpolation</span>(Poblenou_NO2_2014_ts_<span class="dv">1</span>)</code></pre></div>
+<p>Plot of data with NA-s vs data with imputations with interpolation algorithm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotNA.imputations</span>(<span class="dt">x.withNA =</span> Poblenou_NO2_2014_ts_<span class="dv">1</span>, <span class="dt">x.withImputations =</span> imp_2014_1_NO2_Poblenou_intp)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>I am going to choose interpolation algorithm to impute values to the data that I will use for forecasting purposes and the exploration analysis.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-exploration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

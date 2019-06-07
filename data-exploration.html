@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 3 Data exploration | Air pollution in Barcelona</title>
+  <meta name="description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 3 Data exploration | Air pollution in Barcelona" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Data exploration | Air pollution in Barcelona" />
+  
+  <meta name="twitter:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+<meta name="author" content="Jone Lerchundi">
+
+
+<meta name="date" content="2019-06-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-cleaning-and-gathering.html">
+<link rel="next" href="forecasting.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Air pollution in Barcelona</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#scope"><i class="fa fa-check"></i><b>1.2</b> Scope</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#approach"><i class="fa fa-check"></i><b>1.3</b> Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html"><i class="fa fa-check"></i><b>2</b> Data cleaning and gathering</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#pollution"><i class="fa fa-check"></i><b>2.1.1</b> Pollution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#weather-data"><i class="fa fa-check"></i><b>2.1.2</b> Weather data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#hospitalizations-in-barcelona"><i class="fa fa-check"></i><b>2.1.3</b> Hospitalizations in Barcelona</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#initial-data-cleansing-and-analysis"><i class="fa fa-check"></i><b>2.2</b> Initial data cleansing and analysis</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#missing-values-management---package-imputets"><i class="fa fa-check"></i><b>2.2.1</b> Missing values management - package imputeTS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>3</b> Data exploration</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-exploration.html"><a href="data-exploration.html#general-exploration"><i class="fa fa-check"></i><b>3.1</b> General exploration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-exploration.html"><a href="data-exploration.html#weather-and-pollution"><i class="fa fa-check"></i><b>3.2</b> Weather and pollution</a></li>
+<li class="chapter" data-level="3.3" data-path="data-exploration.html"><a href="data-exploration.html#health-and-pollution"><i class="fa fa-check"></i><b>3.3</b> Health and pollution</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>4</b> Forecasting</a></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a><ul>
+<li class="chapter" data-level="5.1" data-path="conclusions.html"><a href="conclusions.html#data-quality"><i class="fa fa-check"></i><b>5.1</b> Data Quality</a></li>
+<li class="chapter" data-level="5.2" data-path="conclusions.html"><a href="conclusions.html#which-days-of-the-week-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.2</b> Which days of the week have the cleanest air?</a></li>
+<li class="chapter" data-level="5.3" data-path="conclusions.html"><a href="conclusions.html#which-months-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.3</b> Which months have the cleanest air?</a></li>
+<li class="chapter" data-level="5.4" data-path="conclusions.html"><a href="conclusions.html#what-time-of-the-day-is-the-most-polluted-and-the-cleanest"><i class="fa fa-check"></i><b>5.4</b> What time of the day is the most polluted? And the cleanest?</a></li>
+<li class="chapter" data-level="5.5" data-path="conclusions.html"><a href="conclusions.html#compliance-with-eu-air-quality-legislation"><i class="fa fa-check"></i><b>5.5</b> Compliance with EU Air Quality Legislation?</a></li>
+<li class="chapter" data-level="5.6" data-path="conclusions.html"><a href="conclusions.html#weather-impacts-to-pollution"><i class="fa fa-check"></i><b>5.6</b> Weather impacts to pollution</a></li>
+<li class="chapter" data-level="5.7" data-path="conclusions.html"><a href="conclusions.html#pollutions-relationship-with-medical-issues"><i class="fa fa-check"></i><b>5.7</b> Pollution’s relationship with medical issues</a></li>
+<li class="chapter" data-level="5.8" data-path="conclusions.html"><a href="conclusions.html#forecasting-pollution"><i class="fa fa-check"></i><b>5.8</b> Forecasting pollution</a></li>
+<li class="chapter" data-level="5.9" data-path="conclusions.html"><a href="conclusions.html#next-steps"><i class="fa fa-check"></i><b>5.9</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>6</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Air pollution in Barcelona</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-exploration" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Data exploration</h1>
+<p>I want to know more about the pollution in Barcelona and so in this chapter I will try to get more insights, and see what I discover from the data. There are multiple questions I’m curious about and I am going to try find answers by using some additional datasets like weather, health and calendar dates. You can find the R script in <a href="https://github.com/Ionetxu/Project_AIR/blob/master/Data_Exploration.R">here</a></p>
+<div id="general-exploration" class="section level2">
+<h2><span class="header-section-number">3.1</span> General exploration</h2>
+<p>Let’s start by loading the data for NO2 and PM10 pollutants in Eixample from 2014 to 2018. Please load files “Eixample_NO2_2014_2018.csv” and “Eixample_PM10.csv”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(purrr)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(knitr)
+<span class="kw">library</span>(xts)
+<span class="kw">library</span>(zoo)
+<span class="kw">library</span>(gridExtra)
+<span class="kw">library</span>(fpp2)
+<span class="kw">library</span>(RcppRoll)
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(imputeTS)
+<span class="kw">library</span>(ggfortify)
+<span class="kw">library</span>(urca)
+<span class="kw">library</span>(forecast)
+<span class="kw">library</span>(hydroTSM)
+<span class="kw">library</span>(tidyquant)
+<span class="kw">library</span>(reshape)
+<span class="kw">library</span>(ggpubr)
+<span class="kw">library</span>(openair)
+<span class="kw">library</span>(data.table)
+<span class="kw">require</span>(<span class="st">&#39;data.table&#39;</span>)
+<span class="kw">library</span>(robust)
+<span class="kw">library</span>(corrplot)
+Eixample_NO2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Eixample_NO2_2014_2018.csv&#39;</span>)
+Eixample_PM10 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Eixample_PM10.csv&#39;</span>)</code></pre></div>
+<p>I will rename columns for NO2 and PM10.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2 &lt;-<span class="st"> </span>Eixample_NO2 <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">NO2=</span><span class="st">&#39;imp_2014_2018_NO2_Eixample_intp&#39;</span>)
+Eixample_PM10 &lt;-<span class="st"> </span>Eixample_PM10 <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">PM10=</span><span class="st">&#39;imp_2014_2018_PM10_Eixample_intp&#39;</span>)</code></pre></div>
+<p>I am going to calculate the daily value for the average, median, min and max of both pollutants NO2 and PM10 in Eixample from 2014 to 2018.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">c</span>(<span class="dt">min =</span> <span class="kw">min</span>(x), <span class="dt">max =</span> <span class="kw">max</span>(x), <span class="dt">mean =</span> <span class="kw">mean</span>(x), <span class="dt">median =</span> <span class="kw">median</span>(x))
+Eixample_NO2_day &lt;-<span class="st"> </span>Eixample_NO2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tq_transmute</span>(<span class="dt">select     =</span> NO2,
+               <span class="dt">mutate_fun =</span> apply.daily,
+               <span class="dt">FUN        =</span> stat_fun)
+<span class="kw">summary</span>(Eixample_NO2_day)</code></pre></div>
+<pre><code>##        dt                           min              max        
+##  Min.   :2014-01-01 23:00:00   Min.   :  9.00   Min.   : 25.00  
+##  1st Qu.:2015-04-03 11:00:00   1st Qu.: 26.00   1st Qu.: 71.00  
+##  Median :2016-07-02 23:00:00   Median : 34.00   Median : 86.00  
+##  Mean   :2016-07-02 22:59:14   Mean   : 35.54   Mean   : 87.97  
+##  3rd Qu.:2017-10-02 11:00:00   3rd Qu.: 43.00   3rd Qu.:102.00  
+##  Max.   :2019-01-01 00:00:00   Max.   :127.00   Max.   :200.00  
+##       mean            median      
+##  Min.   : 18.27   Min.   : 17.60  
+##  1st Qu.: 46.32   1st Qu.: 45.23  
+##  Median : 58.58   Median : 57.50  
+##  Mean   : 59.74   Mean   : 59.12  
+##  3rd Qu.: 70.66   3rd Qu.: 70.30  
+##  Max.   :129.75   Max.   :139.75</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_day &lt;-<span class="st"> </span>Eixample_PM10 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tq_transmute</span>(<span class="dt">select     =</span> PM10,
+               <span class="dt">mutate_fun =</span> apply.daily,
+               <span class="dt">FUN        =</span> stat_fun)
+<span class="kw">summary</span>(Eixample_PM10_day)</code></pre></div>
+<pre><code>##        dt                           min             max         
+##  Min.   :2014-01-01 23:00:00   Min.   : 1.00   Min.   :  12.17  
+##  1st Qu.:2015-04-03 11:00:00   1st Qu.:13.00   1st Qu.:  34.00  
+##  Median :2016-07-02 23:00:00   Median :18.00   Median :  44.00  
+##  Mean   :2016-07-02 22:59:14   Mean   :18.35   Mean   :  50.38  
+##  3rd Qu.:2017-10-02 11:00:00   3rd Qu.:23.00   3rd Qu.:  57.00  
+##  Max.   :2019-01-01 00:00:00   Max.   :77.16   Max.   :1167.00  
+##       mean             median      
+##  Min.   :  6.271   Min.   : 3.821  
+##  1st Qu.: 22.896   1st Qu.:22.000  
+##  Median : 28.854   Median :28.100  
+##  Mean   : 30.921   Mean   :29.623  
+##  3rd Qu.: 36.281   3rd Qu.:35.200  
+##  Max.   :302.854   Max.   :99.509</code></pre>
+<p>Let’s plot the daily average of NO2 in Eixample:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Eixample_NO2_day, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(dt), <span class="dt">y =</span> mean)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">breaks=</span><span class="st">&#39;1 year&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot; Eixample - NO2 (µg/m3) daily average&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>The trend is not negative, even slightly positive, which means the NO2 pollution has not improved in the last five years. Seasonality seems to be yearly.</p>
+<p>Plot for daily average of PM10:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Eixample_PM10_day, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(dt), <span class="dt">y =</span> mean)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">breaks=</span><span class="st">&#39;1 year&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;PM10 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Eixample - PM10 (µg/m3) daily average&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>There are many outliers and I will look at them in a moment. The trend also seems to be quite flat, PM10 concentrations have not improved much in the last five years.</p>
+<p>Monthly median, average, max and minimum for both NO2 and PM10.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_month &lt;-<span class="st"> </span>Eixample_NO2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tq_transmute</span>(<span class="dt">select     =</span> NO2,
+               <span class="dt">mutate_fun =</span> apply.monthly,
+               <span class="dt">FUN        =</span> stat_fun)
+<span class="kw">summary</span>(Eixample_NO2_month)</code></pre></div>
+<pre><code>##        dt                           min              max       
+##  Min.   :2014-01-31 23:00:00   Min.   :  9.00   Min.   :104.0  
+##  1st Qu.:2015-04-30 23:00:00   1st Qu.: 13.00   1st Qu.:125.0  
+##  Median :2016-07-31 23:00:00   Median : 16.00   Median :136.0  
+##  Mean   :2016-07-31 04:31:28   Mean   : 17.72   Mean   :140.1  
+##  3rd Qu.:2017-10-31 23:00:00   3rd Qu.: 18.00   3rd Qu.:155.0  
+##  Max.   :2019-01-01 00:00:00   Max.   :127.00   Max.   :200.0  
+##       mean            median      
+##  Min.   : 40.92   Min.   : 38.50  
+##  1st Qu.: 54.50   1st Qu.: 52.30  
+##  Median : 59.13   Median : 57.00  
+##  Mean   : 60.83   Mean   : 58.57  
+##  3rd Qu.: 65.76   3rd Qu.: 63.50  
+##  Max.   :127.00   Max.   :127.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_month &lt;-<span class="st"> </span>Eixample_PM10 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tq_transmute</span>(<span class="dt">select     =</span> PM10,
+               <span class="dt">mutate_fun =</span> apply.monthly,
+               <span class="dt">FUN        =</span> stat_fun)
+<span class="kw">summary</span>(Eixample_PM10_month)</code></pre></div>
+<pre><code>##        dt                           min             max        
+##  Min.   :2014-01-31 23:00:00   Min.   : 1.00   Min.   :  51.0  
+##  1st Qu.:2015-04-30 23:00:00   1st Qu.: 4.00   1st Qu.:  79.0  
+##  Median :2016-07-31 23:00:00   Median : 6.00   Median :  98.0  
+##  Mean   :2016-07-31 04:31:28   Mean   : 7.41   Mean   : 151.4  
+##  3rd Qu.:2017-10-31 23:00:00   3rd Qu.: 9.00   3rd Qu.: 127.0  
+##  Max.   :2019-01-01 00:00:00   Max.   :64.00   Max.   :1167.0  
+##       mean           median     
+##  Min.   :20.13   Min.   :18.70  
+##  1st Qu.:27.43   1st Qu.:25.00  
+##  Median :30.80   Median :28.00  
+##  Mean   :31.44   Mean   :28.59  
+##  3rd Qu.:33.96   3rd Qu.:30.90  
+##  Max.   :64.00   Max.   :64.00</code></pre>
+<p>I will plot the monthly values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>( <span class="dt">data =</span>Eixample_NO2_month , <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(dt), <span class="dt">y =</span> mean)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2(µg/m3) - Eixample NO2 monthly avg&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">breaks=</span><span class="st">&#39;6 months&#39;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%m-%Y&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>I see yearly seasonality and positive trend for NO2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span>Eixample_PM10_month ,<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(dt), <span class="dt">y =</span> mean)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;PM10 (µg/m3)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Eixample PM10 monthly avg&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">breaks=</span><span class="st">&#39;6 months&#39;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%m-%Y&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>For PM10 the seasonality is not that evident, and there is not a clear trend neither.</p>
+<p>Yearly mean, median, min and max for both PM10 and NO2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_year &lt;-<span class="st"> </span>Eixample_NO2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tq_transmute</span>(<span class="dt">select     =</span> NO2,
+               <span class="dt">mutate_fun =</span> apply.yearly,
+               <span class="dt">FUN        =</span> stat_fun)
+<span class="kw">head</span>(Eixample_NO2_year,<span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 5
+##   dt                    min   max  mean median
+##   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 2014-12-31 23:00:00     9   159  56.8   54  
+## 2 2015-12-31 23:00:00     9   178  61.4   58.5
+## 3 2016-12-31 23:00:00    11   200  57.3   55  
+## 4 2017-12-31 23:00:00    13   187  64.6   61.3
+## 5 2018-12-31 23:00:00    11   197  58.3   56</code></pre>
+<p>We can now see if NO2 is complying with EU air quality regulations:</p>
+<ul>
+<li>Hourly limit for NO2 of 200 µg/m3 (18 Permitted exceedences each year).</li>
+<li>Average yearly limit of 40 µg/m3.</li>
+</ul>
+<p>There is only one time that NO2 reching 200 µg/m3, so NO2 levels in Barcelona are complying with hourly limit.<br />
+But the average yearly limit of 40 µg/m3 has not been met in any year for the last five years, which is a violation of EU air quality regulations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_year &lt;-<span class="st"> </span>Eixample_PM10 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tq_transmute</span>(<span class="dt">select     =</span> PM10,
+               <span class="dt">mutate_fun =</span> apply.yearly,
+               <span class="dt">FUN        =</span> stat_fun)
+<span class="kw">head</span>(Eixample_PM10_year,<span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 5
+##   dt                    min   max  mean median
+##   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 2014-12-31 23:00:00     4   471  31.5   28.6
+## 2 2015-12-31 23:00:00     1   536  33.5   30  
+## 3 2016-12-31 23:00:00     1   458  29.6   27  
+## 4 2017-12-31 23:00:00     1  1167  30.7   28  
+## 5 2018-12-31 23:00:00     1   431  29.1   26.4</code></pre>
+<p>For PM10, the EU air quality regulations state that:</p>
+<ul>
+<li>Daily concentration for PM10 of 50 µg/m3 (35 Permitted exceedences each year).</li>
+<li>Average yearly limit of 40 µg/m3.</li>
+</ul>
+<p>PM10 average yearly limits are met every year, but I will check if the daily PM10 concentrations meet the EU air quality limits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_day_<span class="dv">2014</span> &lt;-<span class="st"> </span>Eixample_PM10_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>( dt <span class="op">&lt;=</span><span class="st"> &quot;2014-12-31&quot;</span>)
+Eixample_PM10_day_<span class="dv">2015</span> &lt;-<span class="st"> </span>Eixample_PM10_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>( dt <span class="op">&gt;=</span><span class="st"> &quot;2015-01-01&quot;</span> <span class="op">&amp;</span><span class="st"> </span>dt <span class="op">&lt;=</span><span class="st"> &quot;2015-12-31&quot;</span>)
+Eixample_PM10_day_<span class="dv">2016</span> &lt;-<span class="st"> </span>Eixample_PM10_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>( dt <span class="op">&gt;=</span><span class="st"> &quot;2016-01-01&quot;</span> <span class="op">&amp;</span><span class="st"> </span>dt <span class="op">&lt;=</span><span class="st"> &quot;2016-12-31&quot;</span>)
+Eixample_PM10_day_<span class="dv">2017</span> &lt;-<span class="st"> </span>Eixample_PM10_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>( dt <span class="op">&gt;=</span><span class="st"> &quot;2017-01-01&quot;</span> <span class="op">&amp;</span><span class="st"> </span>dt <span class="op">&lt;=</span><span class="st"> &quot;2017-12-31&quot;</span>)
+Eixample_PM10_day_<span class="dv">2018</span> &lt;-<span class="st"> </span>Eixample_PM10_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>( dt <span class="op">&gt;=</span><span class="st"> &quot;2018-01-01&quot;</span> <span class="op">&amp;</span><span class="st"> </span>dt <span class="op">&lt;=</span><span class="st"> &quot;2018-12-31&quot;</span>)
+
+Eixample_PM10_day_<span class="dv">2014</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n_cases =</span> <span class="kw">sum</span>(Eixample_PM10_day_<span class="dv">2014</span><span class="op">$</span>mean <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   n_cases
+##     &lt;int&gt;
+## 1      22</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_day_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n_cases =</span> <span class="kw">sum</span>(Eixample_PM10_day_<span class="dv">2015</span><span class="op">$</span>mean <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   n_cases
+##     &lt;int&gt;
+## 1      33</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_day_<span class="dv">2016</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n_cases =</span> <span class="kw">sum</span>(Eixample_PM10_day_<span class="dv">2016</span><span class="op">$</span>mean <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   n_cases
+##     &lt;int&gt;
+## 1      16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_day_<span class="dv">2017</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n_cases =</span> <span class="kw">sum</span>(Eixample_PM10_day_<span class="dv">2017</span><span class="op">$</span>mean <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   n_cases
+##     &lt;int&gt;
+## 1      20</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_day_<span class="dv">2018</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n_cases =</span> <span class="kw">sum</span>(Eixample_PM10_day_<span class="dv">2018</span><span class="op">$</span>mean <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   n_cases
+##     &lt;int&gt;
+## 1      16</code></pre>
+<p>There is no year with more than 35 cases with concentrations of PM10 higher than 50 µg/m3. Year 2015 had 33 cases but it’s still complying the regulations.</p>
+<p>I am now going to analyze the outliers with extremely high PM10 values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outliers &lt;-<span class="st"> </span>Eixample_PM10_day[<span class="kw">order</span>(Eixample_PM10_day<span class="op">$</span>max, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>),]
+outliers</code></pre></div>
+<pre><code>## # A tibble: 1,827 x 5
+##    dt                    min   max  mean median
+##    &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 2017-06-24 23:00:00    20  1167 303.    54  
+##  2 2015-06-07 23:00:00    21   536  66.7   27  
+##  3 2015-10-03 23:00:00     1   509  60.5   28.2
+##  4 2014-06-24 23:00:00     9   471 144.    56  
+##  5 2016-06-24 23:00:00    15   458 125.    43  
+##  6 2018-06-24 23:00:00    18   431 126.    41  
+##  7 2015-10-04 23:00:00    14   405 109.    28  
+##  8 2015-06-24 23:00:00    19   314  91.3   37  
+##  9 2018-06-23 23:00:00    13   312  43.1   25.8
+## 10 2014-11-30 23:00:00     8   269  99.4   86.4
+## # … with 1,817 more rows</code></pre>
+<p>If we see the list of the maximum values, on the 24th of June, 2017 the maximum concentration measured was of 1167 µg/m3, when the legal limit daily concentration of PM10 is 50 µg/m3. But positions 4,5,6,and 8, are also on the 24th June, which is the day of <a href="http://lameva.barcelona.cat/culturapopular/en/festivals-and-traditions/nit-de-sant-joan">Sant Joan</a>.</p>
+<p>Sant Joan is often described by Catalans as the ‘Nit del Foc’ - meaning the ‘Night of Fire’. The main aspect to the celebrations is fireworks, bonfires and firecrackers. Fireworks cause extensive air pollution in a short amount of time, leaving metal particles, dangerous toxins, harmful chemicals and smoke in the air for hours and days.</p>
+<p>Doing some research on this, I have surprisingly found out that fireworks have been banned in China for Lunar New Year <a href="https://www.youtube.com/watch?v=PMUla2mnz_E">celebrations</a> to avoid higher pollution. Also in India, firecrackers have been partially banned for Diwali hindu <a href="https://www.youtube.com/watch?v=d8lZtiXbonI">celebrations</a>.</p>
+<p>Second highest value in the list, corresponds to 7th June 2015. This is when Barcelona FC won its 5th Champions League final, and celebrations surely included fireworks and firecrackers.</p>
+</div>
+<div id="weather-and-pollution" class="section level2">
+<h2><span class="header-section-number">3.2</span> Weather and pollution</h2>
+<p>What is the relationship between weather and pollutants NO2 and PM10? How are pollutants affected by different weather components? Let’s try to answer these questions.</p>
+<p>Let’s load the data from Raval- zoo in Barcelona (EMA = X4). I’m going to use the weather data from Raval to compare it with pollution measured in Eixample due to proximity between both stations. Please load file “Jlerchundi_X4_14-19.csv”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Weather_bcn &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Jlerchundi_X4_14-19.csv&#39;</span>)</code></pre></div>
+<p>Data column is in format “1/1/2014 1:00”, and it’s a character, so I’ll change it to be same as dt in the pollution datasets and be able to join the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Weather_bcn &lt;-<span class="st"> </span>Weather_bcn <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">dt=</span><span class="st">&quot;DATA (T.U.)&quot;</span>,
+                                             <span class="dt">wd =</span> <span class="st">&quot;DV10&quot;</span>,
+                                             <span class="dt">ws =</span> <span class="st">&quot;VV10&quot;</span>)
+
+Weather_bcn<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(Weather_bcn<span class="op">$</span>dt, <span class="st">&quot;dmy HM&quot;</span>, <span class="dt">truncated =</span> <span class="dv">3</span>)
+<span class="kw">head</span>(Weather_bcn)</code></pre></div>
+<pre><code>## # A tibble: 6 x 12
+##   EMA   dt                      T    Tx    Tn    HR   PPT     P    ws    wd
+##   &lt;chr&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 X4    2014-01-01 00:00:00  10.1  10.9   9.6    56     0 1013.   2.8   324
+## 2 X4    2014-01-01 01:00:00   9.8  10     9.7    58     0 1013.   4.1   316
+## 3 X4    2014-01-01 02:00:00   9.9  10.1   9.6    58     0 1014.   3.4   301
+## 4 X4    2014-01-01 03:00:00   9.4  10     8.3    60     0 1013.   1.8    58
+## 5 X4    2014-01-01 04:00:00   8.4   8.9   7.9    65     0 1013.   1.2   333
+## 6 X4    2014-01-01 05:00:00   8.7   9     8.2    65     0 1013.   1.1    21
+## # … with 2 more variables: VVx10 &lt;dbl&gt;, DVVx10 &lt;dbl&gt;</code></pre>
+<p>Now I will do the join between the weather and pollution data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_weather &lt;-<span class="st"> </span><span class="kw">merge</span>(Eixample_NO2,Weather_bcn,<span class="dt">by=</span><span class="st">&quot;dt&quot;</span> )
+<span class="kw">summary</span>(Eixample_NO2_weather)</code></pre></div>
+<pre><code>##        dt                       pollutant          station_code
+##  Min.   :2014-01-01 01:00:00   Length:43848       Min.   :43   
+##  1st Qu.:2015-04-02 18:45:00   Class :character   1st Qu.:43   
+##  Median :2016-07-02 12:30:00   Mode  :character   Median :43   
+##  Mean   :2016-07-02 07:41:31                      Mean   :43   
+##  3rd Qu.:2017-10-02 06:15:00                      3rd Qu.:43   
+##  Max.   :2019-01-01 00:00:00                      Max.   :43   
+##                                                                
+##     latitude       longitude         unit                year     
+##  Min.   :41.39   Min.   :2.154   Length:43848       Min.   :2014  
+##  1st Qu.:41.39   1st Qu.:2.154   Class :character   1st Qu.:2015  
+##  Median :41.39   Median :2.154   Mode  :character   Median :2016  
+##  Mean   :41.39   Mean   :2.154                      Mean   :2016  
+##  3rd Qu.:41.39   3rd Qu.:2.154                      3rd Qu.:2017  
+##  Max.   :41.39   Max.   :2.154                      Max.   :2018  
+##                                                                   
+##      month             day            value       station_alias     
+##  Min.   : 1.000   Min.   : 1.00   Min.   :  9.0   Length:43848      
+##  1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.: 42.0   Class :character  
+##  Median : 7.000   Median :16.00   Median : 57.0   Mode  :character  
+##  Mean   : 6.527   Mean   :15.74   Mean   : 59.2                     
+##  3rd Qu.:10.000   3rd Qu.:23.00   3rd Qu.: 74.0                     
+##  Max.   :12.000   Max.   :31.00   Max.   :200.0                     
+##                                   NA&#39;s   :17099                     
+##       NO2            EMA                  T               Tx       
+##  Min.   :  9.0   Length:43848       Min.   : 1.10   Min.   : 1.10  
+##  1st Qu.: 42.5   Class :character   1st Qu.:13.40   1st Qu.:13.70  
+##  Median : 57.0   Mode  :character   Median :17.80   Median :18.00  
+##  Mean   : 59.7                      Mean   :18.19   Mean   :18.46  
+##  3rd Qu.: 73.8                      3rd Qu.:23.10   3rd Qu.:23.40  
+##  Max.   :200.0                      Max.   :35.70   Max.   :36.90  
+##                                                                    
+##        Tn              HR             PPT                 P         
+##  Min.   : 1.00   Min.   :  6.0   Min.   : 0.00000   Min.   : 981.3  
+##  1st Qu.:13.20   1st Qu.: 54.0   1st Qu.: 0.00000   1st Qu.:1009.0  
+##  Median :17.50   Median : 65.0   Median : 0.00000   Median :1012.8  
+##  Mean   :17.93   Mean   : 63.7   Mean   : 0.03472   Mean   :1012.7  
+##  3rd Qu.:22.90   3rd Qu.: 74.0   3rd Qu.: 0.00000   3rd Qu.:1016.4  
+##  Max.   :35.20   Max.   :100.0   Max.   :58.70000   Max.   :1036.2  
+##                                                                     
+##        ws               wd            VVx10            DVVx10     
+##  Min.   : 0.000   Min.   :  0.0   Min.   : 0.000   Min.   :  0.0  
+##  1st Qu.: 1.100   1st Qu.: 96.0   1st Qu.: 2.600   1st Qu.: 94.0  
+##  Median : 1.800   Median :205.0   Median : 4.000   Median :207.0  
+##  Mean   : 2.021   Mean   :186.7   Mean   : 4.478   Mean   :189.5  
+##  3rd Qu.: 2.700   3rd Qu.:264.0   3rd Qu.: 5.800   3rd Qu.:270.0  
+##  Max.   :10.400   Max.   :359.0   Max.   :20.900   Max.   :359.0  
+##  NA&#39;s   :21       NA&#39;s   :22      NA&#39;s   :22       NA&#39;s   :22</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_weather &lt;-<span class="st"> </span><span class="kw">merge</span>(Eixample_PM10,Weather_bcn,<span class="dt">by=</span><span class="st">&quot;dt&quot;</span> )
+<span class="kw">summary</span>(Eixample_PM10_weather)</code></pre></div>
+<pre><code>##        dt                       pollutant          station_code
+##  Min.   :2014-01-01 01:00:00   Length:43848       Min.   :43   
+##  1st Qu.:2015-04-02 18:45:00   Class :character   1st Qu.:43   
+##  Median :2016-07-02 12:30:00   Mode  :character   Median :43   
+##  Mean   :2016-07-02 07:41:31                      Mean   :43   
+##  3rd Qu.:2017-10-02 06:15:00                      3rd Qu.:43   
+##  Max.   :2019-01-01 00:00:00                      Max.   :43   
+##                                                                
+##     latitude       longitude         unit                year     
+##  Min.   :41.39   Min.   :2.154   Length:43848       Min.   :2014  
+##  1st Qu.:41.39   1st Qu.:2.154   Class :character   1st Qu.:2015  
+##  Median :41.39   Median :2.154   Mode  :character   Median :2016  
+##  Mean   :41.39   Mean   :2.154                      Mean   :2016  
+##  3rd Qu.:41.39   3rd Qu.:2.154                      3rd Qu.:2017  
+##  Max.   :41.39   Max.   :2.154                      Max.   :2018  
+##                                                                   
+##      month             day            value         station_alias     
+##  Min.   : 1.000   Min.   : 1.00   Min.   :   1.00   Length:43848      
+##  1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.:  21.00   Class :character  
+##  Median : 7.000   Median :16.00   Median :  28.00   Mode  :character  
+##  Mean   : 6.527   Mean   :15.74   Mean   :  30.67                     
+##  3rd Qu.:10.000   3rd Qu.:23.00   3rd Qu.:  37.00                     
+##  Max.   :12.000   Max.   :31.00   Max.   :1167.00                     
+##                                   NA&#39;s   :17595                       
+##       PM10            EMA                  T               Tx       
+##  Min.   :   1.0   Length:43848       Min.   : 1.10   Min.   : 1.10  
+##  1st Qu.:  21.0   Class :character   1st Qu.:13.40   1st Qu.:13.70  
+##  Median :  28.0   Mode  :character   Median :17.80   Median :18.00  
+##  Mean   :  30.9                      Mean   :18.19   Mean   :18.46  
+##  3rd Qu.:  37.0                      3rd Qu.:23.10   3rd Qu.:23.40  
+##  Max.   :1167.0                      Max.   :35.70   Max.   :36.90  
+##                                                                     
+##        Tn              HR             PPT                 P         
+##  Min.   : 1.00   Min.   :  6.0   Min.   : 0.00000   Min.   : 981.3  
+##  1st Qu.:13.20   1st Qu.: 54.0   1st Qu.: 0.00000   1st Qu.:1009.0  
+##  Median :17.50   Median : 65.0   Median : 0.00000   Median :1012.8  
+##  Mean   :17.93   Mean   : 63.7   Mean   : 0.03472   Mean   :1012.7  
+##  3rd Qu.:22.90   3rd Qu.: 74.0   3rd Qu.: 0.00000   3rd Qu.:1016.4  
+##  Max.   :35.20   Max.   :100.0   Max.   :58.70000   Max.   :1036.2  
+##                                                                     
+##        ws               wd            VVx10            DVVx10     
+##  Min.   : 0.000   Min.   :  0.0   Min.   : 0.000   Min.   :  0.0  
+##  1st Qu.: 1.100   1st Qu.: 96.0   1st Qu.: 2.600   1st Qu.: 94.0  
+##  Median : 1.800   Median :205.0   Median : 4.000   Median :207.0  
+##  Mean   : 2.021   Mean   :186.7   Mean   : 4.478   Mean   :189.5  
+##  3rd Qu.: 2.700   3rd Qu.:264.0   3rd Qu.: 5.800   3rd Qu.:270.0  
+##  Max.   :10.400   Max.   :359.0   Max.   :20.900   Max.   :359.0  
+##  NA&#39;s   :21       NA&#39;s   :22      NA&#39;s   :22       NA&#39;s   :22</code></pre>
+<p>In order to create a correlation matrix, I will only select the numeric variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_weather_num_data &lt;-<span class="st"> </span>Eixample_NO2_weather[, <span class="kw">sapply</span>(Eixample_NO2_weather, is.numeric)]</code></pre></div>
+<p>I will only choose the variables that are relevant for the correlation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_weather_cor &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Eixample_NO2_weather_num_data, <span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;station_code&quot;</span>, <span class="st">&quot;latitude&quot;</span>, <span class="st">&quot;longitude&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;month&quot;</span>,<span class="st">&quot;day&quot;</span>,<span class="st">&quot;value&quot;</span>))</code></pre></div>
+<p>I will see if we have NA values in the weather data, as I can’t have any NA data to perform the correlation matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Eixample_NO2_weather_cor))</code></pre></div>
+<pre><code>## [1] 87</code></pre>
+<p>I have 87 values that are NA, so I will remove them from the analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_weather_cor_NA &lt;-Eixample_NO2_weather_cor[<span class="kw">complete.cases</span>(Eixample_NO2_weather_cor), ]</code></pre></div>
+<p>Now I will calculate the correlation matrix with only numeric values and no NA values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cormat_NO2 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(Eixample_NO2_weather_cor_NA),<span class="dv">2</span>)
+<span class="kw">head</span>(cormat_NO2)</code></pre></div>
+<pre><code>##       NO2     T    Tx    Tn    HR   PPT     P    ws    wd VVx10 DVVx10
+## NO2  1.00 -0.09 -0.09 -0.09  0.05  0.00  0.20 -0.31 -0.15 -0.32  -0.14
+## T   -0.09  1.00  1.00  1.00 -0.03 -0.03 -0.06  0.15 -0.10  0.07  -0.11
+## Tx  -0.09  1.00  1.00  1.00 -0.05 -0.03 -0.06  0.15 -0.10  0.08  -0.11
+## Tn  -0.09  1.00  1.00  1.00 -0.02 -0.04 -0.06  0.14 -0.11  0.06  -0.11
+## HR   0.05 -0.03 -0.05 -0.02  1.00  0.11 -0.05 -0.28 -0.29 -0.31  -0.28
+## PPT  0.00 -0.03 -0.03 -0.04  0.11  1.00 -0.05  0.03 -0.02  0.07  -0.02</code></pre>
+<p>Looking at the data, NO2 values have a negative correlation coefficient of -0.31 with wind speed (ws), -0.15 with wind direction (wd), and positive 0.2 with atmospheric pressure (P).</p>
+<p>I will do the same with PM10 values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_PM10_weather_num_data &lt;-<span class="st"> </span>Eixample_PM10_weather[, <span class="kw">sapply</span>(Eixample_PM10_weather, is.numeric)]
+Eixample_PM10_weather_cor &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Eixample_PM10_weather_num_data, <span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;station_code&quot;</span>, <span class="st">&quot;latitude&quot;</span>, <span class="st">&quot;longitude&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;month&quot;</span>,<span class="st">&quot;day&quot;</span>,<span class="st">&quot;value&quot;</span>))
+
+Eixample_PM10_weather_cor_NA &lt;-Eixample_PM10_weather_cor[<span class="kw">complete.cases</span>(Eixample_PM10_weather_cor), ]
+cormat_PM10 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(Eixample_PM10_weather_cor_NA),<span class="dv">2</span>)
+<span class="kw">head</span>(cormat_PM10)</code></pre></div>
+<pre><code>##       PM10     T    Tx    Tn    HR   PPT     P    ws    wd VVx10 DVVx10
+## PM10  1.00  0.19  0.19  0.18  0.05 -0.01  0.10 -0.08 -0.12 -0.10  -0.12
+## T     0.19  1.00  1.00  1.00 -0.03 -0.03 -0.06  0.15 -0.10  0.07  -0.11
+## Tx    0.19  1.00  1.00  1.00 -0.05 -0.03 -0.06  0.15 -0.10  0.08  -0.11
+## Tn    0.18  1.00  1.00  1.00 -0.02 -0.04 -0.06  0.14 -0.11  0.06  -0.11
+## HR    0.05 -0.03 -0.05 -0.02  1.00  0.11 -0.05 -0.28 -0.29 -0.31  -0.28
+## PPT  -0.01 -0.03 -0.03 -0.04  0.11  1.00 -0.05  0.03 -0.02  0.07  -0.02</code></pre>
+<p>PM10 is most correlated with average temperature(T), with positive coefficient of 0.19, and then with atmospheric pressure (P) with correlation coefficient of 0.10. PM10 is also correlated with wind direction with negative coefficient -0.12.</p>
+<p>The correlation matrix plot for relationship between NO2 and weather:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">corrplot</span>(cormat_NO2, <span class="dt">type=</span><span class="st">&quot;upper&quot;</span>, <span class="dt">order=</span><span class="st">&quot;hclust&quot;</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p>The correlation matrix plot for relationship between PM10 and weather:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">corrplot</span>(cormat_PM10, <span class="dt">type=</span><span class="st">&quot;upper&quot;</span>,<span class="dt">order=</span><span class="st">&quot;hclust&quot;</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>I will plot the most correlated variables, the NO2 pollution with Atmospheric pressure.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(Eixample_NO2_weather_cor_NA, <span class="dt">x =</span> <span class="st">&quot;NO2&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;P&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,
+          <span class="dt">xlab =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Atmospheric pressure (hPa)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2 vs P&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p>The higher the atmospheric pressure, the higher will be the NO2 concentration in the air. When there is anticyclone, winds are calmer therefore pollution is higher.</p>
+<p>Let’a analyze the relationship between NO2 levels and Wind speed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(Eixample_NO2_weather_cor_NA, <span class="dt">x =</span> <span class="st">&quot;NO2&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;ws&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,
+          <span class="dt">xlab =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Wind speed (m/s)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2 vs Wind speed&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p>The NO2 concentrations decrease with higher wind speeds.</p>
+<p>For wind direction and NO2 relationship, I will use a windRose plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">windRose</span>(Eixample_NO2_weather_cor_NA, <span class="dt">ws =</span> <span class="st">&quot;ws&quot;</span>, <span class="dt">wd =</span> <span class="st">&quot;wd&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p>This plot tells us that the highest speed is normally NW direction winds, and 15% of the times the wind is SW.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">percentileRose</span>( <span class="dt">mydata =</span> Eixample_NO2_weather_cor_NA, <span class="dt">wd =</span> <span class="st">&quot;wd&quot;</span>, <span class="dt">pollutant =</span> <span class="st">&quot;NO2&quot;</span>, <span class="dt">mean=</span><span class="ot">TRUE</span>, <span class="dt">key.footer =</span> <span class="st">&quot;percentile&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p>According to this graph, NO2 pollution is lowest when the wind is NW direction and higher speed. While when the wind is SE direction and low speed,the pollution is highest. This makes sense I understand this looking at the geography of the city, where the ocean sits south east of the city, and the pollution can scape that direction when the wind is NW. But when the wind is SE, the mountains hold the smog on top of the city.</p>
+<p>I will do the same analysis for PM10. For PM10 the most influencing factor is Temperature.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(Eixample_PM10_weather_cor_NA, <span class="dt">x =</span> <span class="st">&quot;PM10&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;T&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,
+          <span class="dt">xlab =</span> <span class="st">&quot;PM10 (µg/m3)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Temperature (°C)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;PM10 and T relationship in Eixample&quot;</span>) <span class="op">+</span>
+<span class="st">          </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>)) <span class="co">#taking out outliers</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(Eixample_PM10_weather_cor_NA, <span class="dt">x =</span> <span class="st">&quot;PM10&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;P&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,
+          <span class="dt">xlab =</span> <span class="st">&quot;PM10 (µg/m3)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Pressure (hPa)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;PM10 and P relationship in Eixample&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>)) <span class="co">#taking out outliers</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>PM10 concentrations are higher with higher temperature and atmospheric pressure.</p>
+<p>Regarding wind direction and PM10:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">percentileRose</span>( <span class="dt">mydata =</span> Eixample_PM10_weather_cor_NA, <span class="dt">wd =</span> <span class="st">&quot;wd&quot;</span>, <span class="dt">pollutant =</span> <span class="st">&quot;PM10&quot;</span>, <span class="dt">mean=</span><span class="ot">TRUE</span>, <span class="dt">key.footer =</span> <span class="st">&quot;percentile&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>Very similar effect of the wind direction for NO2 and PM10. Pollution increases with SE wind direction and decreases with NW direction.</p>
+</div>
+<div id="health-and-pollution" class="section level2">
+<h2><span class="header-section-number">3.3</span> Health and pollution</h2>
+<p>I will now try to see if there is any relationship between NO2 and PM10 concentrations and hospitalizations due to respiratory and cardiac issues. I will load the dataset of hospitalizations due to respiratory issues first. The data is aggregated by diagnosis and CIM-9 code,and they are daily values registered in Barcelona city. Please load file “Respiratory_2014-2017.csv”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_resp &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Respiratory_2014-2017.csv&#39;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;latin1&quot;</span>))</code></pre></div>
+<p>I will rename the column names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_resp &lt;-<span class="st"> </span>health_resp <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">day=</span><span class="st">&quot;dia&quot;</span>,
+                                             <span class="dt">month=</span> <span class="st">&quot;mes&quot;</span>,
+                                             <span class="dt">year=</span> <span class="st">&quot;any&quot;</span>,
+                                             <span class="dt">Diagnosis =</span> <span class="st">&quot;Diagnòstic Principal&quot;</span>,
+                                             <span class="dt">Hospitalizations =</span> <span class="st">&quot;Contactes d&#39;hospitalització d&#39;aguts (altes AH)&quot;</span>)
+<span class="kw">head</span>(health_resp)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##     day month  year Diagnosis                      `cim-9` Hospitalizations
+##   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;                            &lt;dbl&gt;            &lt;dbl&gt;
+## 1     1 Gener  2014 Nasofaringitis aguda [refreda…     460                1
+## 2     1 Gener  2014 Amigdalitis aguda; NOS;fol·li…     463                1
+## 3     1 Gener  2014 Pneumònia pneumocòccica [Estr…     481                1
+## 4     1 Gener  2014 Pneumònia provocada per un mi…     486               14
+## 5     2 Gener  2014 Abscés periamigdalí; abscés a…     475                1
+## 6     2 Gener  2014 Pneumònia pneumocòccica [Estr…     481                3</code></pre>
+<p>Month names are strings in catalan and the system can’t parse them into date format. I will translate the month names and transform into date format:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Gener&quot;</span>] &lt;-<span class="st"> &quot;January&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Febrer&quot;</span>] &lt;-<span class="st"> &quot;February&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Març&quot;</span>] &lt;-<span class="st"> &quot;March&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Abril&quot;</span>] &lt;-<span class="st"> &quot;April&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Maig&quot;</span>] &lt;-<span class="st"> &quot;May&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Juny&quot;</span>] &lt;-<span class="st"> &quot;June&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Juliol&quot;</span>] &lt;-<span class="st"> &quot;July&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Agost&quot;</span>] &lt;-<span class="st"> &quot;August&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Setembre&quot;</span>] &lt;-<span class="st"> &quot;September&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Octubre&quot;</span>] &lt;-<span class="st"> &quot;October&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Novembre&quot;</span>] &lt;-<span class="st"> &quot;November&quot;</span>
+health_resp<span class="op">$</span>month[health_resp<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Desembre&quot;</span>] &lt;-<span class="st"> &quot;December&quot;</span></code></pre></div>
+<p>I will transform the year, month, day columns in a date format column called dt similarly to NO2 and PM10 dataframes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_resp<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">paste</span>(health_resp<span class="op">$</span>year, health_resp<span class="op">$</span>month, health_resp<span class="op">$</span>day, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ymd</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.Date</span>()
+Eixample_NO2_day<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">as.Date</span>(Eixample_NO2_day<span class="op">$</span>dt)
+Eixample_PM10_day<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">as.Date</span>(Eixample_PM10_day<span class="op">$</span>dt)</code></pre></div>
+<p>We only have health data from 2014 to 2018 so I will limit the pollution data accordingly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_day &lt;-<span class="st"> </span>Eixample_NO2_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span> ( dt <span class="op">&lt;=</span><span class="st"> &quot;2017-12-31&quot;</span>)
+Eixample_PM10_day &lt;-<span class="st"> </span>Eixample_PM10_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span> ( dt <span class="op">&lt;=</span><span class="st"> &quot;2017-12-31&quot;</span>)</code></pre></div>
+<p>I will now perform the joins of the NO2 and PM10 with weather data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_resp &lt;-<span class="st"> </span><span class="kw">merge</span>(Eixample_NO2_day,health_resp,<span class="dt">by=</span><span class="st">&quot;dt&quot;</span> )
+Eixample_PM10_resp &lt;-<span class="st"> </span><span class="kw">merge</span>(Eixample_PM10_day,health_resp,<span class="dt">by=</span><span class="st">&quot;dt&quot;</span> )</code></pre></div>
+<p>I am going to transform the data to perform correlation analysis. I need to aggregate the data by dt,but I need different aggregation types for each column: average for NO2/PM10 and summmation for hospitalizations count.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_NO2 &lt;-<span class="st"> </span><span class="kw">data.table</span>(Eixample_NO2_resp)
+df.NO2_resp &lt;-<span class="st"> </span>df_NO2[, <span class="kw">list</span>(<span class="dt">NO2=</span><span class="kw">mean</span>(mean), <span class="dt">Hospitalizations_resp=</span><span class="kw">sum</span>(Hospitalizations)),
+             by=dt]
+df.NO2_resp</code></pre></div>
+<pre><code>##               dt      NO2 Hospitalizations_resp
+##    1: 2014-01-01 52.13043                    38
+##    2: 2014-01-02 86.39583                    74
+##    3: 2014-01-03 79.27083                    61
+##    4: 2014-01-04 42.18750                    48
+##    5: 2014-01-05 24.93750                    36
+##   ---                                          
+## 1456: 2017-12-26 49.14583                    42
+## 1457: 2017-12-27 37.54167                    53
+## 1458: 2017-12-28 61.68750                    39
+## 1459: 2017-12-29 72.54167                    27
+## 1460: 2017-12-30 56.47917                    17</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_PM10 &lt;-<span class="st"> </span><span class="kw">data.table</span>(Eixample_PM10_resp)
+df_PM10_resp &lt;-<span class="st"> </span>df_PM10[, <span class="kw">list</span>(<span class="dt">PM10=</span><span class="kw">mean</span>(mean), <span class="dt">Hospitalizations_resp=</span><span class="kw">sum</span>(Hospitalizations)),
+             by=dt]
+df_PM10_resp</code></pre></div>
+<pre><code>##               dt     PM10 Hospitalizations_resp
+##    1: 2014-01-01 20.04348                    38
+##    2: 2014-01-02 37.72917                    74
+##    3: 2014-01-03 40.41667                    61
+##    4: 2014-01-04 20.85417                    48
+##    5: 2014-01-05 10.45833                    36
+##   ---                                          
+## 1456: 2017-12-26 13.95833                    42
+## 1457: 2017-12-27 18.22917                    53
+## 1458: 2017-12-28 17.95833                    39
+## 1459: 2017-12-29 26.39583                    27
+## 1460: 2017-12-30 25.95833                    17</code></pre>
+<p>I am going to do a normality test for pearson correlation tests: Shapiro-Wilk normality test for NO2</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(df.NO2_resp<span class="op">$</span>NO2) </code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  df.NO2_resp$NO2
+## W = 0.97615, p-value = 7.869e-15</code></pre>
+<p>Shapiro-Wilk normality test for Hospitalizations</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(df.NO2_resp<span class="op">$</span>Hospitalizations_resp) </code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  df.NO2_resp$Hospitalizations_resp
+## W = 0.98142, p-value = 8.661e-13</code></pre>
+<p>Pearson correlation test between NO2 and hospitalizations due to respiratory issues:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cor_test1 &lt;-<span class="st"> </span><span class="kw">cor.test</span>(df.NO2_resp<span class="op">$</span>NO2, df.NO2_resp<span class="op">$</span>Hospitalizations_resp,
+                <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)
+cor_test1</code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  df.NO2_resp$NO2 and df.NO2_resp$Hospitalizations_resp
+## t = 17.656, df = 1458, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3765017 0.4610722
+## sample estimates:
+##       cor 
+## 0.4196974</code></pre>
+<p>Correlation coefficient is around 0.42 which is a considerable correlation. Plot NO2 vs hospitalizations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(df.NO2_resp, <span class="dt">x =</span> <span class="st">&quot;NO2&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hospitalizations_resp&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,
+          <span class="dt">xlab =</span> <span class="st">&quot;NO2 (µg/m3)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Hospitalizations&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2 vs hospitalizations respiratory issues&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>I will plot NO2 and hospitalizations with the temporal component:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df.NO2_resp, <span class="kw">aes</span>(<span class="dt">x =</span>dt)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> NO2, <span class="dt">colour =</span> <span class="st">&quot;NO2&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2014-01-01&quot;</span>),<span class="kw">as.Date</span>(<span class="st">&quot;2014-01-16&quot;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Hospitalizations_resp, <span class="dt">colour =</span> <span class="st">&quot;Hospitalizations&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hospitalizations&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;NO2(µg/m3) - Respiratory issues in Eixample - week&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;2 days&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%d-%b&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>Now I will perform Pearson correlation test for PM10:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cor_test2 &lt;-<span class="st"> </span><span class="kw">cor.test</span>(df_PM10_resp<span class="op">$</span>PM10, df_PM10_resp<span class="op">$</span>Hospitalizations_resp,
+                <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)
+cor_test2</code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  df_PM10_resp$PM10 and df_PM10_resp$Hospitalizations_resp
+## t = 0.96423, df = 1458, p-value = 0.3351
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.02609173  0.07644766
+## sample estimates:
+##        cor 
+## 0.02524436</code></pre>
+<p>Correlation coeficcient is 0.025, which is extremely low. My hypothesis is that the outliers are corrupting the result.</p>
+<p>I will calculate a robust covariance matrix between PM10 and respiration issues, and compare it with a classic covariance matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cov_PM10_resp_classic &lt;-<span class="st"> </span><span class="kw">covClassic</span>(<span class="kw">cbind</span>(df_PM10_resp<span class="op">$</span>PM10,df_PM10_resp<span class="op">$</span>Hospitalizations_resp), <span class="dt">corr =</span> <span class="ot">TRUE</span>)
+cov_PM10_resp_classic </code></pre></div>
+<pre><code>## Call:
+## covClassic(data = cbind(df_PM10_resp$PM10, df_PM10_resp$Hospitalizations_resp), 
+##     corr = TRUE)
+## 
+## Classical Estimate of Correlation: 
+##         V1      V2
+## V1 1.00000 0.02524
+## V2 0.02524 1.00000
+## 
+## Classical Estimate of Location: 
+##    V1    V2 
+## 31.36 35.44</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cov_PM10_resp_rob &lt;-<span class="st"> </span><span class="kw">covRob</span>(<span class="kw">cbind</span>(df_PM10_resp<span class="op">$</span>PM10,df_PM10_resp<span class="op">$</span>Hospitalizations_resp), <span class="dt">corr =</span> <span class="ot">TRUE</span>)
+cov_PM10_resp_rob</code></pre></div>
+<pre><code>## Call:
+## covRob(data = cbind(df_PM10_resp$PM10, df_PM10_resp$Hospitalizations_resp), 
+##     corr = TRUE)
+## 
+## Robust Estimate of Correlation: 
+##         V1      V2
+## V1 1.00000 0.09628
+## V2 0.09628 1.00000
+## 
+## Robust Estimate of Location: 
+##    V1    V2 
+## 29.22 33.97</code></pre>
+<p>I will plot both covariance matrixes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cov_PM10_resp_classic)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-78-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-78-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cov_PM10_resp_rob)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-79-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-79-2.png" width="672" /></p>
+<p>Therefore according to the data, the relationship between PM10 and hospitalizations for respiratory issues is weakly correlated. But this is not what other studies reflect, so there must be some other fact that I am missing.</p>
+<p>I am going to do the same analysis for hospitalizations related to heart diseases. Please load file “Heart_2014-2017.csv”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_heart &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;/Users/ione/Desktop/Project_AIR/data/Heart_2014-2017.csv&#39;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;latin1&quot;</span>))</code></pre></div>
+<p>I will rename the column names</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_heart &lt;-<span class="st"> </span>health_heart <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">day=</span><span class="st">&quot;dia&quot;</span>,
+                                             <span class="dt">month=</span> <span class="st">&quot;mes&quot;</span>,
+                                             <span class="dt">year=</span> <span class="st">&quot;any&quot;</span>,
+                                             <span class="dt">Diagnosis =</span> <span class="st">&quot;Diagnòstic Principal&quot;</span>,
+                                             <span class="dt">Hospitalizations =</span> <span class="st">&quot;Contactes d&#39;hospitalització d&#39;aguts (altes AH)&quot;</span>)</code></pre></div>
+<p>I translate all values of month from catalan to english:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Gener&quot;</span>] &lt;-<span class="st"> &quot;January&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Febrer&quot;</span>] &lt;-<span class="st"> &quot;February&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Març&quot;</span>] &lt;-<span class="st"> &quot;March&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Abril&quot;</span>] &lt;-<span class="st"> &quot;April&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Maig&quot;</span>] &lt;-<span class="st"> &quot;May&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Juny&quot;</span>] &lt;-<span class="st"> &quot;June&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Juliol&quot;</span>] &lt;-<span class="st"> &quot;July&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Agost&quot;</span>] &lt;-<span class="st"> &quot;August&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Setembre&quot;</span>] &lt;-<span class="st"> &quot;September&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Octubre&quot;</span>] &lt;-<span class="st"> &quot;October&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Novembre&quot;</span>] &lt;-<span class="st"> &quot;November&quot;</span>
+health_heart<span class="op">$</span>month[health_heart<span class="op">$</span>month <span class="op">==</span><span class="st"> &quot;Desembre&quot;</span>] &lt;-<span class="st"> &quot;December&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">health_heart<span class="op">$</span>dt &lt;-<span class="st"> </span><span class="kw">paste</span>(health_heart<span class="op">$</span>year, health_heart<span class="op">$</span>month, health_heart<span class="op">$</span>day, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ymd</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.Date</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Eixample_NO2_heart &lt;-<span class="st"> </span><span class="kw">merge</span>(Eixample_NO2_day,health_heart,<span class="dt">by=</span><span class="st">&quot;dt&quot;</span> )
+Eixample_PM10_heart &lt;-<span class="st"> </span><span class="kw">merge</span>(Eixample_PM10_day,health_heart,<span class="dt">by=</span><span class="st">&quot;dt&quot;</span> )</code></pre></div>
+<p>I am now going to aggregate data,avg for NO2 and sum for hospitalizations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_NO2_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">data.table</span>(Eixample_NO2_heart)
+df_NO2_heart &lt;-<span class="st"> </span>df_NO2_<span class="dv">1</span>[, <span class="kw">list</span>(<span class="dt">NO2=</span><span class="kw">mean</span>(mean), <span class="dt">Hospitalizations_heart=</span><span class="kw">sum</span>(Hospitalizations)),
+             by=dt]
+df_NO2_heart</code></pre></div>
+<pre><code>##               dt      NO2 Hospitalizations_heart
+##    1: 2014-01-01 52.13043                     27
+##    2: 2014-01-02 86.39583                     51
+##    3: 2014-01-03 79.27083                     47
+##    4: 2014-01-04 42.18750                     44
+##    5: 2014-01-05 24.93750                     37
+##   ---                                           
+## 1457: 2017-12-27 37.54167                     24
+## 1458: 2017-12-28 61.68750                     24
+## 1459: 2017-12-29 72.54167                     13
+## 1460: 2017-12-30 56.47917                      6
+## 1461: 2017-12-31 47.93617                      1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_PM10_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">data.table</span>(Eixample_PM10_heart)
+df_PM10_heart &lt;-<span class="st"> </span>df_PM10_<span class="dv">1</span>[, <span class="kw">list</span>(<span class="dt">PM10=</span><span class="kw">mean</span>(mean), <span class="dt">Hospitalizations_heart=</span><span class="kw">sum</span>(Hospitalizations)),
+                   by=dt]
+df_PM10_heart</code></pre></div>
+<pre><code>##               dt     PM10 Hospitalizations_heart
+##    1: 2014-01-01 20.04348                     27
+##    2: 2014-01-02 37.72917                     51
+##    3: 2014-01-03 40.41667                     47
+##    4: 2014-01-04 20.85417                     44
+##    5: 2014-01-05 10.45833                     37
+##   ---                                           
+## 1457: 2017-12-27 18.22917                     24
+## 1458: 2017-12-28 17.95833                     24
+## 1459: 2017-12-29 26.39583                     13
+## 1460: 2017-12-30 25.95833                      6
+## 1461: 2017-12-31 20.12766                      1</code></pre>
+<p>Now I will perform the Pearson correlation test between NO2, PM10 and hospitalizations caused by heart issues:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cor_NO2_heart &lt;-<span class="st"> </span><span class="kw">cor.test</span>(df_NO2_heart<span class="op">$</span>NO2, df_NO2_heart<span class="op">$</span>Hospitalizations_heart,
+                <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)
+cor_NO2_heart</code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  df_NO2_heart$NO2 and df_NO2_heart$Hospitalizations_heart
+## t = 22.073, df = 1459, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.4608750 0.5378185
+## sample estimates:
+##       cor 
+## 0.5003339</code></pre>
+<p>The correlation coefficient between NO2 and heart issues is 0.50, which is significant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cor_PM10_heart &lt;-<span class="st"> </span><span class="kw">cor.test</span>(df_PM10_heart<span class="op">$</span>PM10, df_PM10_heart<span class="op">$</span>Hospitalizations_heart,
+                          <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)
+cor_PM10_heart</code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  df_PM10_heart$PM10 and df_PM10_heart$Hospitalizations_heart
+## t = 4.8236, df = 1459, p-value = 1.558e-06
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.07448119 0.17544481
+## sample estimates:
+##       cor 
+## 0.1252874</code></pre>
+<p>The cor coef between PM10 and heart issues is just 0.125, which is quite weak.</p>
+<p>If I plot hospitalizations vs NO2 concentrations, there is some positive relationship:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(df_NO2_heart, <span class="dt">x =</span> <span class="st">&quot;NO2&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hospitalizations_heart&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>,
+          <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>,
+                            <span class="dt">fill =</span> <span class="st">&quot;lightgray&quot;</span>) ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_cor</span>(<span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">label.x =</span> <span class="dv">3</span>, <span class="dt">label.y =</span> <span class="dv">65</span>)  <span class="co"># Add correlation coefficient</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<p>For PM10 in the contrary the relationship is not clear when plotting, probably due to the outliers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(df_PM10_heart, <span class="dt">x =</span> <span class="st">&quot;PM10&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hospitalizations_heart&quot;</span>,
+          <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>,
+          <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
+          <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>,
+                            <span class="dt">fill =</span> <span class="st">&quot;lightgray&quot;</span>) ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_cor</span>(<span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">label.x =</span> <span class="dv">3</span>, <span class="dt">label.y =</span> <span class="dv">100</span>)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>I will try to do the correlation analysis for PM10 with a robust analytical covariance method so that the effect of the outliers is reduced.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cov_PM10_heart_classic &lt;-<span class="st"> </span><span class="kw">covClassic</span>(<span class="kw">cbind</span>(df_PM10_heart<span class="op">$</span>PM10,df_PM10_heart<span class="op">$</span>Hospitalizations_heart), <span class="dt">corr =</span> <span class="ot">TRUE</span>)
+cov_PM10_heart_classic</code></pre></div>
+<pre><code>## Call:
+## covClassic(data = cbind(df_PM10_heart$PM10, df_PM10_heart$Hospitalizations_heart), 
+##     corr = TRUE)
+## 
+## Classical Estimate of Correlation: 
+##        V1     V2
+## V1 1.0000 0.1253
+## V2 0.1253 1.0000
+## 
+## Classical Estimate of Location: 
+##    V1    V2 
+## 31.35 42.32</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cov_PM10_heart_rob &lt;-<span class="st"> </span><span class="kw">covRob</span>(<span class="kw">cbind</span>(df_PM10_heart<span class="op">$</span>PM10,df_PM10_heart<span class="op">$</span>Hospitalizations_heart), <span class="dt">corr =</span> <span class="ot">TRUE</span>)
+cov_PM10_heart_rob</code></pre></div>
+<pre><code>## Call:
+## covRob(data = cbind(df_PM10_heart$PM10, df_PM10_heart$Hospitalizations_heart), 
+##     corr = TRUE)
+## 
+## Robust Estimate of Correlation: 
+##        V1     V2
+## V1 1.0000 0.2404
+## V2 0.2404 1.0000
+## 
+## Robust Estimate of Location: 
+##    V1    V2 
+## 29.08 41.45</code></pre>
+<p>With the robust method the covariance is up to 0.24.If I plot both the classic and the robust:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cov_PM10_heart_classic)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-93-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-93-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cov_PM10_heart_rob)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-94-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-94-2.png" width="672" /></p>
+<p>Between NO2 and hospitalizations due to respiratory issues there is some positive relationship with correlation coefficient of 0.42, and between NO2 and hospitalizations due to heart problems is moderate with a correlation coefficient of 0.5.</p>
+<p>But PM10 and hospitalizations with respiratory problems are weakly linked with a correlation of 0.1, and PM10 and hospitalizations due to heart problems are linked with a correlation of 0.24.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-cleaning-and-gathering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="forecasting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
