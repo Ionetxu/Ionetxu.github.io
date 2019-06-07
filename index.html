@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Air pollution in Barcelona</title>
+  <meta name="description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Air pollution in Barcelona" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Air pollution in Barcelona" />
+  
+  <meta name="twitter:description" content="This is my final thesis for my Masters in Data Science about pollution in Barcelona." />
+  
+
+<meta name="author" content="Jone Lerchundi">
+
+
+<meta name="date" content="2019-06-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="intro.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Air pollution in Barcelona</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#scope"><i class="fa fa-check"></i><b>1.2</b> Scope</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#approach"><i class="fa fa-check"></i><b>1.3</b> Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html"><i class="fa fa-check"></i><b>2</b> Data cleaning and gathering</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#pollution"><i class="fa fa-check"></i><b>2.1.1</b> Pollution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#weather-data"><i class="fa fa-check"></i><b>2.1.2</b> Weather data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#hospitalizations-in-barcelona"><i class="fa fa-check"></i><b>2.1.3</b> Hospitalizations in Barcelona</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#initial-data-cleansing-and-analysis"><i class="fa fa-check"></i><b>2.2</b> Initial data cleansing and analysis</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-cleaning-and-gathering.html"><a href="data-cleaning-and-gathering.html#missing-values-management---package-imputets"><i class="fa fa-check"></i><b>2.2.1</b> Missing values management - package imputeTS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>3</b> Data exploration</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-exploration.html"><a href="data-exploration.html#general-exploration"><i class="fa fa-check"></i><b>3.1</b> General exploration</a></li>
+<li class="chapter" data-level="3.2" data-path="data-exploration.html"><a href="data-exploration.html#weather-and-pollution"><i class="fa fa-check"></i><b>3.2</b> Weather and pollution</a></li>
+<li class="chapter" data-level="3.3" data-path="data-exploration.html"><a href="data-exploration.html#health-and-pollution"><i class="fa fa-check"></i><b>3.3</b> Health and pollution</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>4</b> Forecasting</a></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a><ul>
+<li class="chapter" data-level="5.1" data-path="conclusions.html"><a href="conclusions.html#data-quality"><i class="fa fa-check"></i><b>5.1</b> Data Quality</a></li>
+<li class="chapter" data-level="5.2" data-path="conclusions.html"><a href="conclusions.html#which-days-of-the-week-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.2</b> Which days of the week have the cleanest air?</a></li>
+<li class="chapter" data-level="5.3" data-path="conclusions.html"><a href="conclusions.html#which-months-have-the-cleanest-air"><i class="fa fa-check"></i><b>5.3</b> Which months have the cleanest air?</a></li>
+<li class="chapter" data-level="5.4" data-path="conclusions.html"><a href="conclusions.html#what-time-of-the-day-is-the-most-polluted-and-the-cleanest"><i class="fa fa-check"></i><b>5.4</b> What time of the day is the most polluted? And the cleanest?</a></li>
+<li class="chapter" data-level="5.5" data-path="conclusions.html"><a href="conclusions.html#compliance-with-eu-air-quality-legislation"><i class="fa fa-check"></i><b>5.5</b> Compliance with EU Air Quality Legislation?</a></li>
+<li class="chapter" data-level="5.6" data-path="conclusions.html"><a href="conclusions.html#weather-impacts-to-pollution"><i class="fa fa-check"></i><b>5.6</b> Weather impacts to pollution</a></li>
+<li class="chapter" data-level="5.7" data-path="conclusions.html"><a href="conclusions.html#pollutions-relationship-with-medical-issues"><i class="fa fa-check"></i><b>5.7</b> Pollution’s relationship with medical issues</a></li>
+<li class="chapter" data-level="5.8" data-path="conclusions.html"><a href="conclusions.html#forecasting-pollution"><i class="fa fa-check"></i><b>5.8</b> Forecasting pollution</a></li>
+<li class="chapter" data-level="5.9" data-path="conclusions.html"><a href="conclusions.html#next-steps"><i class="fa fa-check"></i><b>5.9</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>6</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Air pollution in Barcelona</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Air pollution in Barcelona</h1>
+<p class="author"><em>Jone Lerchundi</em></p>
+<p class="date"><em>2019-06-07</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<blockquote>
+<p>“It is a capital mistake to theorize before one has data.” Sherlock Holmes, “A Study in Scarlett” (Arthur Conan Doyle)</p>
+</blockquote>
+<p>My name is Jone Lerchundi and I have worked as a BI consultant for more than 8 years helping companies to understand and leverage useful insights from data. Following my passion for data, I have recently studied a <a href="https://kschool.com/cursos/master-en-data-science-barcelona/">Masters in Data Science</a> (13th promotion) at Kschool with the idea of expanding my skills and learning new tools and ideas that data science offers to better understand, capture and explain stories from data.</p>
+<p>This thesis has been written as a final project for my Masters in Data Science, but it is also a personal project as I am committed to also using my analytical skills to fight the current climate and environmental emergency that we are facing. This is a work in progress project and my intention is to continue getting useful insights and information and share them for further conciousness.</p>
+<p>I am still learning so if you see anything wrong in my code or my assumptions, or you have any questions or new ideas that can help with this project, please don’t hesitate to contact me, I will be more than happy to hear from you.</p>
+<p>You can find me in my <a href="www.linkedin.com/in/jonelerchundi">Linkedin profile</a>.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
